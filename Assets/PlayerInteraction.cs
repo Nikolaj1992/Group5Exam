@@ -36,17 +36,18 @@ public class PlayerInteraction : MonoBehaviour
     void InteractWithClosestObject()
     {
         Transform rootParent = closestObject.transform.root;
-        Debug.Log(rootParent.name);
+        // Debug.Log(rootParent.name);
         Animator animator = closestObject.GetComponentInChildren<Animator>();
         if (!animator) return;
         switch (rootParent.name)
         {
             case "LeverPuzzle":
-                Debug.Log("Successfully detected lever puzzle"); 
-                // animator.SetTrigger("OpenDoor");
+                // Debug.Log("Successfully detected lever puzzle"); 
+                animator.SetTrigger("LeverPull");
+                animator.SetBool("LeverDown", !animator.GetBool("LeverDown"));
                 break;
             default:
-                Debug.Log("nuffin");
+                Debug.Log("default");
                 break;
         }
     }
@@ -58,11 +59,10 @@ public class PlayerInteraction : MonoBehaviour
 
         // Get all colliders within range
         Collider[] colliders = Physics.OverlapSphere(cameraPosition, range, detectionMask);
-
-        // Reset closestObject to null at the beginning of each detection
+        
+        // Saves the previous closestObject, so that its outline can be disabled
         GameObject previousClosestObject = closestObject;
-
-        // Loop through detected colliders
+        
         foreach (Collider col in colliders)
         {
             Vector3 directionToObject = (col.transform.position - cameraPosition).normalized;
