@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class LeverPuzzleScript : MonoBehaviour
 {
-    private Dictionary<string, GameObject> levers = new Dictionary<string, GameObject>();
+    private List<GameObject> levers = new List<GameObject>();
     private List<bool> correctCombination = new List<bool>();
-    private List<bool> randomLeverStartPosition = new List<bool>();
+    private List<bool> leverStates = new List<bool>();
     
     void Awake()
     {
         for (int i = 0; i < gameObject.transform.Find("Levers").childCount; i++)
         {
             GameObject lever = gameObject.transform.Find("Levers").transform.GetChild(i).gameObject;
-            levers.Add(lever.name, lever);
+            levers.Add(lever);
             Debug.Log("added: " + lever.name);
         }
         Debug.Log("lever amount: " + levers.Count);
@@ -26,22 +26,22 @@ public class LeverPuzzleScript : MonoBehaviour
         
         do
         {
-            randomLeverStartPosition.Clear();
+            leverStates.Clear();
             for (int i = 0; i < levers.Count; i++)
             {
-                randomLeverStartPosition.Add(Random.Range(0, 2) == 0);
+                leverStates.Add(Random.Range(0, 2) == 0);
             }
-        } while (randomLeverStartPosition.SequenceEqual(correctCombination));
-        Debug.Log("S: " + string.Join(", ", randomLeverStartPosition.Select(x => x.ToString()).ToArray()));
+        } while (leverStates.SequenceEqual(correctCombination));
+        Debug.Log("S: " + string.Join(", ", leverStates.Select(x => x.ToString()).ToArray()));
 
-        // Randomize lever position at the start
+        // Randomize lever states at the start
         for (int i = 0; i < levers.Count(); i++)
         {
-            if (randomLeverStartPosition.ElementAt(i))
+            if (leverStates[i])
             { 
-                Animator animator = levers.ElementAt(i).Value.GetComponentInChildren<Animator>(); 
+                Animator animator = levers[i].GetComponentInChildren<Animator>(); 
                 animator.SetTrigger("LeverPull");
-                animator.SetBool("LeverDown", randomLeverStartPosition.ElementAt(i)); 
+                animator.SetBool("LeverDown", leverStates[i]); 
             }
         }
         
@@ -52,8 +52,25 @@ public class LeverPuzzleScript : MonoBehaviour
         
     }
 
-    void deactivateLevers()
+    public void LeverPulled()
     {
-        
+        for (int i = 0; i < levers.Count; i++)
+        {
+            leverStates[i] = levers[i].GetComponentInChildren<Animator>().GetBool("LeverDown");
+        }
+
+        if (leverStates.SequenceEqual(correctCombination))
+        {
+            DeactivateLevers();
+            Debug.Log("WON");
+        }
+    }
+
+    void DeactivateLevers()
+    {
+        for (int i = 0; i < levers.Count; i++)
+        {
+            levers[i].layer = LayerMask.NameToLayer("Default");
+        }
     }
 }

@@ -35,7 +35,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void InteractWithClosestObject()
     {
-        Transform rootParent = closestObject.transform.root;
+        if (closestObject.layer != LayerMask.NameToLayer("Interactable")) return;
+        GameObject rootParent = closestObject.transform.root.gameObject;
         // Debug.Log(rootParent.name);
         Animator animator = closestObject.GetComponentInChildren<Animator>();
         if (!animator) return;
@@ -45,6 +46,7 @@ public class PlayerInteraction : MonoBehaviour
                 // Debug.Log("Successfully detected lever puzzle"); 
                 animator.SetTrigger("LeverPull");
                 animator.SetBool("LeverDown", !animator.GetBool("LeverDown"));
+                rootParent.GetComponent<LeverPuzzleScript>().LeverPulled();
                 break;
             default:
                 Debug.Log("default");
@@ -116,6 +118,15 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     outlineScript.enabled = true;
                 }
+            }
+        }
+
+        if (closestObject != null && closestObject.layer != LayerMask.NameToLayer("Interactable"))
+        {
+            Outline outlineScript = closestObject.GetComponent<Outline>();
+            if (outlineScript != null)
+            {
+                outlineScript.enabled = false;
             }
         }
 
