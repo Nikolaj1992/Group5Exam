@@ -42,7 +42,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!animator) return;
         switch (rootParent.name)
         {
-            case "LeverPuzzle":
+            case "LeverPuzzle(Clone)": // (Clone) at the end because it's a loaded prefab
                 // Debug.Log("Successfully detected lever puzzle"); 
                 animator.SetTrigger("LeverPull");
                 animator.SetBool("LeverDown", !animator.GetBool("LeverDown"));
