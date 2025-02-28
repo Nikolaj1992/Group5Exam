@@ -7,6 +7,7 @@ public class LeverPuzzleScript : MonoBehaviour
     private List<GameObject> levers = new List<GameObject>();
     private List<bool> correctCombination = new List<bool>();
     private List<bool> leverStates = new List<bool>();
+    // True means the lever is pointing down, False means the lever is pointing up
     
     void Awake()
     {
@@ -14,9 +15,9 @@ public class LeverPuzzleScript : MonoBehaviour
         {
             GameObject lever = gameObject.transform.Find("Levers").transform.GetChild(i).gameObject;
             levers.Add(lever);
-            Debug.Log("added: " + lever.name);
+            // Debug.Log("added: " + lever.name);
         }
-        Debug.Log("lever amount: " + levers.Count);
+        // Debug.Log("lever amount: " + levers.Count);
 
         for (int i = 0; i < levers.Count; i++)
         {
@@ -44,11 +45,6 @@ public class LeverPuzzleScript : MonoBehaviour
                 animator.SetBool("LeverDown", leverStates[i]); 
             }
         }
-        
-    }
-    
-    void Update()
-    {
         
     }
 
