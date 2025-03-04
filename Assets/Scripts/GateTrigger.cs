@@ -1,20 +1,21 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class LoadoutMenu : MonoBehaviour
+public class GateTrigger : MonoBehaviour
 {
 
     private GameManager gameManager;
-    
+
     private void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    public void StartGame()
+    private void OnTriggerEnter(Collider other)
     {
-        // SceneManager.LoadSceneAsync("SampleScene");
-        gameManager.StartNewRound();
+        if (other.CompareTag("Player"))
+        {
+            gameManager.EndRound();
+        }
     }
     
 }
