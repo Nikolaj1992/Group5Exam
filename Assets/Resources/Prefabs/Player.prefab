@@ -84,9 +84,6 @@ GameObject:
   - component: {fileID: 1775901001795511653}
   - component: {fileID: 1607374866568431844}
   - component: {fileID: 8358818982562762107}
-  - component: {fileID: 1936651176430083063}
-  - component: {fileID: 8247488168080801623}
-  - component: {fileID: 3145451391017058175}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -192,50 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9248417010f44994f9e37ec4894aed10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1936651176430083063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793166088987344940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c321cef114002e4285fc3158939f3af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8247488168080801623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793166088987344940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04e0a0fa2b75ab24e89c8fb51c15eee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 500
-  alive: 0
-  generalDamageResistance: 0
-  impactResistance: 0
-  elementalResistance: 0
---- !u!114 &3145451391017058175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793166088987344940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bfd443fa36143345bf6ddbc6bb95207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpeed: 0
-  speed: 0
-  statusEffectIconHandler: {fileID: 0}
 --- !u!1001 &1515290090752966741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5066056848955781667, guid: b7eae9b5810504a4490b902372d94613, type: 3}
       propertyPath: m_TagString
-      value: MainCamera
+      value: PlayerCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5066056848955781670, guid: b7eae9b5810504a4490b902372d94613, type: 3}
       propertyPath: m_RootOrder
