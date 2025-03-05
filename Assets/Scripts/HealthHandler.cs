@@ -16,7 +16,9 @@ public class HealthHandler : MonoBehaviour
         alive = true;
         statusEffectHandler = gameObject.GetComponent<StatusEffectHandler>();
     }
-    
+   
+
+
     void Update()
     {
         if (health <= 0 && alive)
@@ -27,43 +29,52 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
+    public delegate void HealthChanged();
+    public event HealthChanged OnHealthChanged;
+
     public void DealDamage(float damage, DamageType damageType)
+{
+    if (!alive)
     {
-        if (!alive)
-        {
-            Debug.Log(gameObject.name + " is already dead.");
-            return;
-        }
-        float damageToDeal = 0;
-        switch (damageType)
-        {
-            case DamageType.Piercing:
-                damageToDeal = damage;
-                break;
-            case DamageType.Impact:
-                damageToDeal = impactResistance > 0 ? damage * (1 - (impactResistance / 100)) : damage;
-                break;
-            case DamageType.Elemental:
-                damageToDeal = elementalResistance > 0 ? damage * (1 - (elementalResistance / 100)) : damage;
-                break;
-        }
-        damageToDeal = generalDamageResistance > 0 ? damageToDeal * (1 - (generalDamageResistance / 100)) : damageToDeal;
-        health -= damageToDeal;
-        Debug.Log(gameObject.name + " took " + damageToDeal + " damage");
+        Debug.Log(gameObject.name + " is already dead.");
+        return;
     }
+    
+    float damageToDeal = 0;
+    switch (damageType)
+    {
+        case DamageType.Piercing:
+            damageToDeal = damage;
+            break;
+        case DamageType.Impact:
+            damageToDeal = impactResistance > 0 ? damage * (1 - (impactResistance / 100)) : damage;
+            break;
+        case DamageType.Elemental:
+            damageToDeal = elementalResistance > 0 ? damage * (1 - (elementalResistance / 100)) : damage;
+            break;
+    }
+    damageToDeal = generalDamageResistance > 0 ? damageToDeal * (1 - (generalDamageResistance / 100)) : damageToDeal;
+    
+    health -= damageToDeal;
 
-    public void DealDamageOverTime(float damage, DamageType damageType, float duration)
-    {
-        StartCoroutine(DOT(damage, damageType, duration));
-    }
+    OnHealthChanged?.Invoke(); // Notify health bar UI
+    
+    Debug.Log(gameObject.name + " took " + damageToDeal + " damage");
+}
 
-    private IEnumerator DOT(float damage, DamageType type, float duration)
+public void DealDamageOverTime(float damage, DamageType damageType, float duration)
+{
+    StartCoroutine(DOT(damage, damageType, duration));
+}
+
+private IEnumerator DOT(float damage, DamageType type, float duration)
+{
+    for (int i = 0; i < duration; i++)
     {
-        for (int i = 0; i < duration; i++)
-        {
-            if (!alive) yield break;
-            DealDamage(damage, type);
-            yield return new WaitForSeconds(1f);
-        }
+        if (!alive) yield break;
+        DealDamage(damage, type);
+        OnHealthChanged?.Invoke(); // Update health bar each tick
+        yield return new WaitForSeconds(1f);
     }
+}
 }
