@@ -84,8 +84,7 @@ GameObject:
   - component: {fileID: 1775901001795511653}
   - component: {fileID: 1607374866568431844}
   - component: {fileID: 8358818982562762107}
-  - component: {fileID: 4286190892911556307}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -190,24 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9248417010f44994f9e37ec4894aed10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4286190892911556307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793166088987344940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc00fdb21bcb07a4b899d139c594759f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coneAngle: 15
-  range: 10
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  closestObject: {fileID: 0}
 --- !u!1001 &1515290090752966741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5066056848955781667, guid: b7eae9b5810504a4490b902372d94613, type: 3}
       propertyPath: m_TagString
-      value: MainCamera
+      value: PlayerCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5066056848955781670, guid: b7eae9b5810504a4490b902372d94613, type: 3}
       propertyPath: m_RootOrder
