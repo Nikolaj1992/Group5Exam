@@ -9,6 +9,8 @@ public class LoadoutMenu : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void StartGame()

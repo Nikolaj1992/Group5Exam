@@ -10,12 +10,17 @@ public class GameManager : MonoBehaviour
 
     public string gameScene = "SampleScene";    // Handle target scene in inspector
     
+    private GameObject mainMenu;
+    private GameObject loadoutMenu;
+    
     private void Start()
     {
         if (string.IsNullOrEmpty(gameScene))
         {
             Debug.LogError("Game scene name is not set!");
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
     private void Awake()
@@ -28,6 +33,30 @@ public class GameManager : MonoBehaviour
         else
         {
             DontDestroyOnLoad(this.gameObject);  // To save stats, gear and stuff we should have one GameMagager at all times
+        }
+    }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Main Menu")
+        {
+            Transform menuCanvas = GameObject.Find("MenuCanvas")?.transform;
+            if (menuCanvas != null)
+            {
+                mainMenu = menuCanvas.Find("MainMenu")?.gameObject;
+                loadoutMenu = menuCanvas.Find("LoadoutMenu")?.gameObject;
+
+                if (mainMenu == null || loadoutMenu == null)
+                {
+                    Debug.LogError("MainMenu or LoadoutMenu not found in the scene!");
+                }
+                else
+                {
+                    // We want the loadout menu
+                    mainMenu.SetActive(false);
+                    loadoutMenu.SetActive(true);
+                }
+            }
         }
     }
 
@@ -65,6 +94,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Game scene name is not set!");
         }
+    }
+    
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 }
