@@ -888,7 +888,7 @@
     "m_AlphaMode": 2,
     "m_RenderFace": 1,
     "m_AlphaClip": true,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
     "m_AdditionalMotionVectorMode": 0,
