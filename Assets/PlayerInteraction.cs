@@ -8,7 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public LayerMask detectionMask; // Mask for filtering objects (set in Inspector)
     
     private List<GameObject> detectedObjects = new List<GameObject>();
-    public GameObject closestObject; // The closest object to the player (public for access from other scripts)
+    [HideInInspector] public GameObject closestObject; // The closest object to the player (public for access from other scripts)
     
     private Camera playerCamera;
     

@@ -19,6 +19,10 @@ public class GroundSlashShooter : MonoBehaviour
             timeToFire = Time.time + 1/fireRate;
             ShootProjectile();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gameObject.GetComponent<BeamShooter>().FireShots(3);
+        }
     }
 
     void ShootProjectile()
