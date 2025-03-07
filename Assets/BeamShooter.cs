@@ -53,7 +53,7 @@ public class BeamShooter : MonoBehaviour
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    Debug.Log("Detected: " + hitCollider.name);
+                    // Debug.Log("Detected: " + hitCollider.name);
                     if (hitCollider.name == "Dummy01" && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
                     GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
@@ -93,10 +93,7 @@ public class BeamShooter : MonoBehaviour
             knockbackVector += position;
         }
         knockbackVector = knockbackVector / raycastDirections.Count;
-
-        // Normalize the resulting vector to get a unit vector (direction)
         knockbackVector = knockbackVector.normalized;
-        
         //TODO: make a general attack script to handle this next part
         if (knockbackVector != Vector3.zero) ApplyEffectsToTargets(knockbackVector, 5);
     }

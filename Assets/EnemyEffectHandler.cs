@@ -18,7 +18,6 @@ public class EnemyEffectHandler : MonoBehaviour
     
     public void ApplyKnockback(Vector3 knockbackDirection, float knockbackForce)
     { 
-            rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-            rb.AddForce(Vector3.up * (knockbackForce / 2), ForceMode.Impulse);
+            rb.AddForce(knockbackDirection * knockbackForce + Vector3.up * (knockbackForce / 3), ForceMode.Impulse);
     }
 }
