@@ -13,7 +13,7 @@ public class AnimationHandler : MonoBehaviour
     {
         playerMovement.Jumping += SetJumpAnimation;    
         playerMovement.Landing += SetLandingAnimation;
-        playerAttack.Attack += SetAttackAnimation;
+        // playerAttack.Attack += SetAttackAnimation;
     }
 
 
@@ -54,7 +54,7 @@ public class AnimationHandler : MonoBehaviour
     {
         playerMovement.Jumping -= SetJumpAnimation;    
         playerMovement.Landing -= SetLandingAnimation;
-        playerAttack.Attack -= SetAttackAnimation;
+        // playerAttack.Attack -= SetAttackAnimation;
     }
     #endregion
 }

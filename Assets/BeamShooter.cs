@@ -2,23 +2,28 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
-public class BeamShooter : MonoBehaviour
+public class BeamShooter : MonoBehaviour, IAttack
 {
-    public GameObject muzzlePoint; // The object from which the pellets originate
     public float spreadAngle = 15f; // Max spread angle in degrees
     public float range = 25f;      // Max raycast distance
     
     private List<Vector3> raycastOrigins = new List<Vector3>();
     private List<Vector3> raycastDirections = new List<Vector3>();
     
-    [SerializeField] private GameObject beamPrefab;
-    [SerializeField] private GameObject impactPrefab;
+    public GameObject beamPrefab;
+    public GameObject impactPrefab;
     
     //TODO: move to general attack script
     private List<GameObject> targets = new List<GameObject>();
+
+    public void ExecuteAttack(Transform muzzle)
+    {
+        // only here to please the interface
+    }
     
-    public void FireShots(int shotAmount)
+    public void ExecuteAttack(Transform muzzle, int shotAmount)
     {
         targets.Clear();
         raycastOrigins.Clear();
@@ -26,11 +31,11 @@ public class BeamShooter : MonoBehaviour
         Vector3 knockbackVector = Vector3.zero;
         
         // Use muzzlePoint position if assigned, otherwise use the script's transform position
-        Vector3 origin = muzzlePoint ? muzzlePoint.transform.position : transform.position;
+        Vector3 origin = muzzle ? muzzle.position : transform.position;
         
         for (int i = 0; i < shotAmount; i++)
         {
-            Vector3 direction = GetRandomDirectionInCone(transform.forward, spreadAngle);
+            Vector3 direction = GetRandomDirectionInCone(muzzle.forward, spreadAngle);
             
             raycastOrigins.Add(origin);
             raycastDirections.Add(direction);
@@ -53,32 +58,34 @@ public class BeamShooter : MonoBehaviour
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    // Debug.Log("Detected: " + hitCollider.name);
                     if (hitCollider.name == "Dummy01" && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
-                    GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
-                    Destroy(sphereP);
-                    Destroy(sphere, 1f);
-                    sphere.GetComponent<SphereCollider>().enabled = false;
                     
-                    sphere.transform.localScale = Vector3.one * 2; // * 1 before the 2 is gone, 1 is the radius
-                    
-                    Material mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-                    
-                    mat.SetFloat("_Surface", 1); // 1 = Transparent
-                    mat.SetFloat("_Blend", 1); // Alpha Blending
-                    mat.SetFloat("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    mat.SetFloat("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    mat.SetFloat("_ZWrite", 0); // Disable depth writing for transparency
-                    mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); // Enable transparency in URP
-                    mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-                    
-                    mat.color = new Color(1f, 0f, 0f, 0.3f); // Red with 30% opacity
-
-                    Renderer sphereRenderer = sphere.GetComponent<Renderer>();
-                    sphereRenderer.material = mat;
-                    sphereRenderer.shadowCastingMode = ShadowCastingMode.Off;
-                    sphereRenderer.receiveShadows = false;
+                    // enable the code below to show the hitbox of each beam impact and have the target logged
+                    // Debug.Log("Detected: " + hitCollider.name);
+                    // GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    // GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
+                    // Destroy(sphereP);
+                    // Destroy(sphere, 1f);
+                    // sphere.GetComponent<SphereCollider>().enabled = false;
+                    //
+                    // sphere.transform.localScale = Vector3.one * 2; // * 1 before the 2 is gone, 1 is the radius
+                    //
+                    // Material mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+                    //
+                    // mat.SetFloat("_Surface", 1); // 1 = Transparent
+                    // mat.SetFloat("_Blend", 1); // Alpha Blending
+                    // mat.SetFloat("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    // mat.SetFloat("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    // mat.SetFloat("_ZWrite", 0); // Disable depth writing for transparency
+                    // mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); // Enable transparency in URP
+                    // mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                    //
+                    // mat.color = new Color(1f, 0f, 0f, 0.3f); // Red with 30% opacity
+                    //
+                    // Renderer sphereRenderer = sphere.GetComponent<Renderer>();
+                    // sphereRenderer.material = mat;
+                    // sphereRenderer.shadowCastingMode = ShadowCastingMode.Off;
+                    // sphereRenderer.receiveShadows = false;
                 }
             }
             else

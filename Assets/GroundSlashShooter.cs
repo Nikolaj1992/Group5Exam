@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class GroundSlashShooter : MonoBehaviour
+public class GroundSlashShooter : MonoBehaviour, IAttack
 {
-    public Camera cam;
     public GameObject projectile;
-    public Transform firePoint;
     public float fireRate = 4;
     
     private Vector3 destination;
@@ -12,33 +10,26 @@ public class GroundSlashShooter : MonoBehaviour
     private float timeToFire;
     private GroundSlash groundSlashScript;
     
-    void Update()
+    public void ExecuteAttack(Transform muzzle, int i)
     {
-        if (Input.GetKeyDown(KeyCode.R) && Time.time > timeToFire)
-        {
-            timeToFire = Time.time + 1/fireRate;
-            ShootProjectile();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            gameObject.GetComponent<BeamShooter>().FireShots(3);
-        }
+        // only here to please the interface
     }
-
-    void ShootProjectile()
+    
+    public void ExecuteAttack(Transform muzzle)
     {
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        // Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Ray ray = new Ray(muzzle.position, muzzle.forward);
         destination = ray.GetPoint(1000);
-        InstantiateProjectile();
+        InstantiateProjectile(muzzle);
     }
 
-    void InstantiateProjectile()
+    void InstantiateProjectile(Transform muzzle)
     {
-        var projectileObj = Instantiate(projectile, firePoint.position, Quaternion.identity) as GameObject;
+        var projectileObj = Instantiate(projectile, muzzle.position, muzzle.rotation) as GameObject;
 
         groundSlashScript = projectileObj.GetComponent<GroundSlash>();
         RotateToDestination(projectileObj, destination, true);
-        projectileObj.GetComponent<Rigidbody>().linearVelocity = transform.forward * groundSlashScript.speed;
+        projectileObj.GetComponent<Rigidbody>().linearVelocity = muzzle.forward * groundSlashScript.speed;
     }
 
     void RotateToDestination(GameObject obj, Vector3 destination, bool onlyY)
