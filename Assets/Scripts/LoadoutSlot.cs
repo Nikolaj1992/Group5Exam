@@ -1,18 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class LoadoutSlot : MonoBehaviour
 {
 
-    public Image itemImage;
-    public event Action<string, Sprite> OnItemSelect;
-
-    public void SelectItem(string itemName, Sprite itemSprite)
+    public Image iconImage;
+    public delegate void ItemSelectHandler(Item item, Sprite sprite);
+    public event ItemSelectHandler OnItemSelect;
+    
+    public void SelectItem(Item item)
     {
-        itemImage.sprite = itemSprite;
-        itemImage.enabled = true;
-        OnItemSelect?.Invoke(itemName, itemSprite);
+        if (OnItemSelect != null)
+        {
+            OnItemSelect.Invoke(item, item.itemIcon);
+        }
     }
     
+    public void SetIcon(Sprite icon)
+    {
+        iconImage.sprite = icon;
+    }
+
 }
