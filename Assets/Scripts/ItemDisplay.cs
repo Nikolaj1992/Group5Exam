@@ -13,6 +13,8 @@ public class ItemDisplay : MonoBehaviour
     {
         loadoutMenu = FindAnyObjectByType<LoadoutMenu>();
         
+        iconImage = transform.Find("Icon").GetComponent<Image>();
+        
         GetComponent<Button>().onClick.AddListener(OnItemSelected);
     }
 
@@ -20,8 +22,10 @@ public class ItemDisplay : MonoBehaviour
     {
         itemData = newItem;
         iconImage.sprite = itemData.itemIcon;
+
+        iconImage.SetNativeSize();
     }
-    
+
     private void OnItemSelected()
     {
         if (itemData == null || loadoutMenu == null) return;

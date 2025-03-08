@@ -28,15 +28,15 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        // We only want one instance
-        if (GameObject.FindWithTag("GameManager") != null && GameObject.FindWithTag("GameManager") != this.gameObject)
+        GameManager existingInstance = FindFirstObjectByType<GameManager>();
+
+        if (existingInstance != null && existingInstance != this)
         {
-            Destroy(this.gameObject);  // Remove duplicates
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);  // To save stats we should have one GameMagager at all times
-        }
+        
+        DontDestroyOnLoad(gameObject);
     }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -16,7 +16,13 @@ public class LoadoutManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            // if (transform.parent != null)
+            // {
+            //     transform.SetParent(null);  // Remove any parent
+            // }
+            
             DontDestroyOnLoad(gameObject);
+            Debug.Log("LoadoutManager Created!");
         }
         else
         {
