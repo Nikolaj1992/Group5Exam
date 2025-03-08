@@ -583,6 +583,7 @@ GameObject:
   - component: {fileID: 593276113}
   - component: {fileID: 593276112}
   - component: {fileID: 593276111}
+  - component: {fileID: 593276114}
   m_Layer: 5
   m_Name: ArmorSlot
   m_TagString: Untagged
@@ -716,6 +717,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593276109}
   m_CullTransparentMesh: 1
+--- !u!114 &593276114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593276109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb1dfeeb6817f941a697678f8d1fcc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 0}
 --- !u!1 &629988805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330108405}
+  - component: {fileID: 1330108406}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -1229,6 +1244,21 @@ Transform:
   - {fileID: 918736298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330108406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330108404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c60073165d1444983d330581f5eed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Fire Staff
+  sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  isWeapon: 0
 --- !u!1 &1359383468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1850,7 @@ GameObject:
   - component: {fileID: 1932625323}
   - component: {fileID: 1932625322}
   - component: {fileID: 1932625321}
+  - component: {fileID: 1932625324}
   m_Layer: 5
   m_Name: WeaponSlot
   m_TagString: Untagged
@@ -1922,7 +1953,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932625319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1953,6 +1984,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932625319}
   m_CullTransparentMesh: 1
+--- !u!114 &1932625324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932625319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb1dfeeb6817f941a697678f8d1fcc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 0}
 --- !u!1001 &2500886880617216506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2089,6 +2133,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 107
       objectReference: {fileID: 0}
+    - target: {fileID: 7066144681506358282, guid: 409f0396dbc678847b6f3b9989bdaa9e, type: 3}
+      propertyPath: armorSlot
+      value: 
+      objectReference: {fileID: 593276114}
+    - target: {fileID: 7066144681506358282, guid: 409f0396dbc678847b6f3b9989bdaa9e, type: 3}
+      propertyPath: weaponSlot
+      value: 
+      objectReference: {fileID: 1932625324}
     - target: {fileID: 7711498770804560348, guid: 409f0396dbc678847b6f3b9989bdaa9e, type: 3}
       propertyPath: m_LocalScale.y
       value: 1

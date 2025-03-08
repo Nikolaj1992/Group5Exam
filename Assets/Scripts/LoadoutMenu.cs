@@ -15,8 +15,8 @@ public class LoadoutMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         
-        weaponSlot.OnItemSelect += (item) => LoadoutManager.Instance.SetWeapon(item);
-        armorSlot.OnItemSelect += (item) => LoadoutManager.Instance.SetArmor(item);
+        weaponSlot.OnItemSelect += (item, sprite) => LoadoutManager.Instance.SetWeapon(item, sprite);
+        armorSlot.OnItemSelect += (item, sprite) => LoadoutManager.Instance.SetArmor(item, sprite);
     }
 
     public void StartGame()

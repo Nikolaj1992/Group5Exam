@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     // If necessary we can later make this a singleton for easier use
     private bool gameIsOver = false;
 
+    [SerializeField] private int playerScore = 0;
+    [SerializeField] private int enemiesKilled = 0;
+
     public string gameScene = "SampleScene";    // Handle target scene in inspector
     
     private GameObject mainMenu;
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this.gameObject);  // To save stats, gear and stuff we should have one GameMagager at all times
+            DontDestroyOnLoad(this.gameObject);  // To save stats we should have one GameMagager at all times
         }
     }
     
@@ -59,6 +62,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    public void AddScore(int amount)
+    {
+        playerScore += amount;
+    }
+
+    public void AddKill()
+    {
+        enemiesKilled++;
+    }
 
     public void EndRound()
     {
@@ -76,8 +89,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         SceneManager.LoadSceneAsync("Main Menu");
-        
-        // We'll need save score and/or gear logic here
     }
 
     public void StartNewRound()

@@ -4,15 +4,15 @@ using System;
 
 public class LoadoutSlot : MonoBehaviour
 {
-    
-    public Text selectedItemText; // UI text to display selected item
 
-    public event Action<string> OnItemSelect;
+    public Image itemImage;
+    public event Action<string, Sprite> OnItemSelect;
 
-    public void SelectItem(string itemName)
+    public void SelectItem(string itemName, Sprite itemSprite)
     {
-        selectedItemText.text = itemName;
-        OnItemSelect?.Invoke(itemName);
+        itemImage.sprite = itemSprite;
+        itemImage.enabled = true;
+        OnItemSelect?.Invoke(itemName, itemSprite);
     }
     
 }
