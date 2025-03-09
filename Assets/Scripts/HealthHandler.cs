@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
 {
+    public GameObject healthBarPrefab; // Drag HealthBarUI Prefab here
+    private HealthBarUI healthBarUI;
+
     [Range(0.0f, 500.0f)] public float health = 100; // added a slider in the inspector, 100 is default max hp
     [HideInInspector] public bool alive;
     public enum DamageType {Piercing, Impact, Elemental} // there is no resistance towards piercing
@@ -11,6 +14,32 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private float elementalResistance;
     private StatusEffectHandler statusEffectHandler;
     
+
+void Start()
+{
+    if (healthBarPrefab != null)
+    {
+        // Instantiate the health bar and make it a child of the Player
+        GameObject healthBarInstance = Instantiate(healthBarPrefab, transform.position, Quaternion.identity, transform);
+
+        // Check if the HealthBarUI component exists before using it
+        healthBarUI = healthBarInstance.GetComponent<HealthBarUI>();
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetHealthHandler(this);
+        }
+        else
+        {
+            Debug.LogError("HealthBarUI component is missing on the instantiated prefab!");
+        }
+    }
+    else
+    {
+        Debug.LogError("HealthBarPrefab is not assigned in the Inspector!");
+    }
+}
+
     void Awake()
     {
         alive = true;
