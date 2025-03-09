@@ -6,17 +6,21 @@ public class HealthBarUI : MonoBehaviour
     private HealthHandler healthHandler;
     private Transform parentTransform;
     private Vector3 offset = new Vector3(0, 2.5f, 0); // Moves the health bar above the player
-    private UnityEngine.UI.Image healthBarFill; // Removed SerializeField to make it dynamic
+    private RectTransform healthBarTransform;
+    private float fullWidth; // Stores the original full width of the health bar
 
     private void Awake()
     {
-        // Find the HealthBarFill automatically
-        healthBarFill = transform.Find("HealthBarBackground/HealthBarFill").GetComponent<UnityEngine.UI.Image>();
+        // Get HealthBarFill's RectTransform
+        healthBarTransform = transform.Find("HealthBarBackground/HealthBarFill").GetComponent<RectTransform>();
 
-        if (healthBarFill == null)
+        if (healthBarTransform == null)
         {
             Debug.LogError("HealthBarFill is missing from the HealthBarUI prefab!");
         }
+
+        // Store the original full width of the health bar
+        fullWidth = healthBarTransform.sizeDelta.x;
     }
 
     public void SetHealthHandler(HealthHandler handler)
@@ -44,9 +48,9 @@ public class HealthBarUI : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        if (healthHandler != null && healthBarFill != null)
-        {
-            healthBarFill.fillAmount = Mathf.Clamp01(healthHandler.health / 100f);
-        }
+        float normalizedHealth = healthHandler.health / 100f;
+
+        // Set the width of the health bar (scales from the left)
+        healthBarTransform.sizeDelta = new Vector2(Mathf.Max(normalizedHealth * fullWidth), healthBarTransform.sizeDelta.y);
     }
 }

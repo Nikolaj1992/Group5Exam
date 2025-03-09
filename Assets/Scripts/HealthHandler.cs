@@ -6,7 +6,17 @@ public class HealthHandler : MonoBehaviour
     public GameObject healthBarPrefab; // Drag HealthBarUI Prefab here
     private HealthBarUI healthBarUI;
 
-    [Range(0.0f, 500.0f)] public float health = 100; // added a slider in the inspector, 100 is default max hp
+    [SerializeField] private float _health = 100;
+
+    public float health
+    {
+    get => _health;
+    set
+        {
+        _health = Mathf.Clamp(value, 0, 100); // Prevents values outside 0-100
+        OnHealthChanged?.Invoke(); // 🔥 Triggers health bar update
+        }
+    }
     [HideInInspector] public bool alive;
     public enum DamageType {Piercing, Impact, Elemental} // there is no resistance towards piercing
     [SerializeField] private float generalDamageResistance; // given as 20 for a 20% damage reduction, hence the math in "dealDamage"
