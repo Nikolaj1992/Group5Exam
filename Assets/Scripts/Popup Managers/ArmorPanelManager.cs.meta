@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d27c081c116bb0741a0176452bb6cb52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - armorItemPrefab: {fileID: 3306557213571837746, guid: eb142b8bf07b9b54d8b281331b83f614, type: 3}
+  - armorPanel: {instanceID: 0}
+  - loadoutMenu: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
