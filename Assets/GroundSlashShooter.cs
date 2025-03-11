@@ -2,22 +2,16 @@ using UnityEngine;
 
 public class GroundSlashShooter : MonoBehaviour, IAttack
 {
-    public GameObject projectile;
-    public float fireRate = 4;
+    [SerializeField] private GameObject projectile;
+    // public float fireRate = 4;
     
     private Vector3 destination;
 
-    private float timeToFire;
+    // private float timeToFire;
     private GroundSlash groundSlashScript;
     
-    public void ExecuteAttack(Transform muzzle, int i)
+    public void ExecuteAttack(Transform muzzle, int amount) // doesn't use amount
     {
-        // only here to please the interface
-    }
-    
-    public void ExecuteAttack(Transform muzzle)
-    {
-        // Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Ray ray = new Ray(muzzle.position, muzzle.forward);
         destination = ray.GetPoint(1000);
         InstantiateProjectile(muzzle);
