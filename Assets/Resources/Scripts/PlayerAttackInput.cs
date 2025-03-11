@@ -49,17 +49,15 @@ public class PlayerAttackInput : MonoBehaviour
         //     Debug.Log("Attack");
         // }
         
-        Debug.Log($"Muzzle Rotation: {muzzle.rotation.eulerAngles}");
-        
         if (Input.GetKeyDown(KeyCode.E))
         {
             lightAttackScript.ExecuteAttack(muzzle,3);
-            Debug.Log("LIGHT");
+            // Debug.Log("LIGHT");
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             heavyAttackScript.ExecuteAttack(muzzle);
-            Debug.Log("HEAVY");
+            // Debug.Log("HEAVY");
         }
     }
 }

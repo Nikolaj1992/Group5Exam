@@ -58,10 +58,10 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    if (hitCollider.name == "Dummy01" && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
+                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
                     
                     // enable the code below to show the hitbox of each beam impact and have the target logged
-                    // Debug.Log("Detected: " + hitCollider.name);
+                    Debug.Log("HIT: " + hitCollider.name);
                     // GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     // GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
                     // Destroy(sphereP);
@@ -137,11 +137,12 @@ public class BeamShooter : MonoBehaviour, IAttack
     {
         foreach (GameObject target in targets)
         {
-            if (target != null && target.name == "Dummy01" && target.GetComponent<Rigidbody>() != null)
+            if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
             {
                 EnemyEffectHandler EEH = target.GetComponent<EnemyEffectHandler>();
                 if (!EEH) return;
                 EEH.ApplyKnockback(knockbackDirection, knockbackForce);
+                EEH.DamageFlash();
             }
         }
     }
