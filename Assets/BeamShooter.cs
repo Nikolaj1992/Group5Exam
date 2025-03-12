@@ -1,41 +1,30 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Rendering;
 using UnityEngine.VFX;
-using Random = UnityEngine.Random;
 
-public class BeamShooter : MonoBehaviour, IAttack
+public class BeamShooter : MonoBehaviour
 {
+    public GameObject muzzlePoint; // The object from which the pellets originate
     public float spreadAngle = 15f; // Max spread angle in degrees
     public float range = 25f;      // Max raycast distance
     
     private List<Vector3> raycastOrigins = new List<Vector3>();
     private List<Vector3> raycastDirections = new List<Vector3>();
     
-    public GameObject beamPrefab;
-    public GameObject impactPrefab;
+    [SerializeField] private GameObject beamPrefab;
+    [SerializeField] private GameObject impactPrefab;
     
-    //TODO: move to general attack script
-    private List<GameObject> targets = new List<GameObject>();
-
-    public void ExecuteAttack(Transform muzzle)
+    public void FireShots(int shotAmount)
     {
-        // only here to please the interface
-    }
-    
-    public void ExecuteAttack(Transform muzzle, int shotAmount)
-    {
-        targets.Clear();
         raycastOrigins.Clear();
         raycastDirections.Clear();
-        Vector3 knockbackVector = Vector3.zero;
         
         // Use muzzlePoint position if assigned, otherwise use the script's transform position
-        Vector3 origin = muzzle ? muzzle.position : transform.position;
+        Vector3 origin = muzzlePoint ? muzzlePoint.transform.position : transform.position;
         
         for (int i = 0; i < shotAmount; i++)
         {
-            Vector3 direction = GetRandomDirectionInCone(muzzle.forward, spreadAngle);
+            Vector3 direction = GetRandomDirectionInCone(transform.forward, spreadAngle);
             
             raycastOrigins.Add(origin);
             raycastDirections.Add(direction);
@@ -43,50 +32,12 @@ public class BeamShooter : MonoBehaviour, IAttack
             if (Physics.Raycast(origin, direction, out RaycastHit hit, range))
             {
                 Debug.DrawRay(origin, direction * hit.distance, Color.red, 1.0f);
-                
-                // impact vfx effect
                 GameObject impact = Instantiate(impactPrefab, hit.point, Quaternion.identity) as GameObject;
                 Destroy(impact, 1f);
-                
-                // beam vfx effect
                 beamPrefab.GetComponentInChildren<VisualEffect>().SetFloat("YLength", hit.distance);
                 GameObject beam = Instantiate(beamPrefab, origin, Quaternion.LookRotation(direction)) as GameObject;
                 Destroy(beam, 0.5f);
                 beamPrefab.GetComponentInChildren<VisualEffect>().SetFloat("YLength", 25); // 25 is the default
-                
-                // sphere to visualize the aoe of the impact, radius is set to 1 and hard coded
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
-                foreach (var hitCollider in hitColliders)
-                {
-                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
-                    
-                    // enable the code below to show the hitbox of each beam impact and have the target logged
-                    Debug.Log("HIT: " + hitCollider.name);
-                    // GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    // GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
-                    // Destroy(sphereP);
-                    // Destroy(sphere, 1f);
-                    // sphere.GetComponent<SphereCollider>().enabled = false;
-                    //
-                    // sphere.transform.localScale = Vector3.one * 2; // * 1 before the 2 is gone, 1 is the radius
-                    //
-                    // Material mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-                    //
-                    // mat.SetFloat("_Surface", 1); // 1 = Transparent
-                    // mat.SetFloat("_Blend", 1); // Alpha Blending
-                    // mat.SetFloat("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    // mat.SetFloat("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    // mat.SetFloat("_ZWrite", 0); // Disable depth writing for transparency
-                    // mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); // Enable transparency in URP
-                    // mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-                    //
-                    // mat.color = new Color(1f, 0f, 0f, 0.3f); // Red with 30% opacity
-                    //
-                    // Renderer sphereRenderer = sphere.GetComponent<Renderer>();
-                    // sphereRenderer.material = mat;
-                    // sphereRenderer.shadowCastingMode = ShadowCastingMode.Off;
-                    // sphereRenderer.receiveShadows = false;
-                }
             }
             else
             {
@@ -94,15 +45,7 @@ public class BeamShooter : MonoBehaviour, IAttack
                 GameObject beam = Instantiate(beamPrefab, origin, Quaternion.LookRotation(direction)) as GameObject;
                 Destroy(beam, 0.5f);
             }
-        } 
-        foreach (Vector3 position in raycastDirections)
-        {
-            knockbackVector += position;
         }
-        knockbackVector = knockbackVector / raycastDirections.Count;
-        knockbackVector = knockbackVector.normalized;
-        //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) ApplyEffectsToTargets(knockbackVector, 5);
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)
@@ -130,20 +73,6 @@ public class BeamShooter : MonoBehaviour, IAttack
         for (int i = 0; i < raycastOrigins.Count; i++)
         {
             Gizmos.DrawLine(raycastOrigins[i], raycastOrigins[i] + raycastDirections[i] * range);
-        }
-    }
-
-    void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce)
-    {
-        foreach (GameObject target in targets)
-        {
-            if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
-            {
-                EnemyEffectHandler EEH = target.GetComponent<EnemyEffectHandler>();
-                if (!EEH) return;
-                EEH.ApplyKnockback(knockbackDirection, knockbackForce);
-                EEH.DamageFlash();
-            }
         }
     }
 }
