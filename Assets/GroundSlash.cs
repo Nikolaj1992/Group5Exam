@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GroundSlash : MonoBehaviour
 {
@@ -10,9 +13,13 @@ public class GroundSlash : MonoBehaviour
     
     private Rigidbody rb;
     private bool stopped;
+
+    private Collider colliderChild;
+    private List<GameObject> targets = new List<GameObject>();
     
     void Start()
     {
+        colliderChild = GetComponentInChildren<MeshCollider>();
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         if (GetComponent<Rigidbody>() != null)
         {
@@ -55,5 +62,15 @@ public class GroundSlash : MonoBehaviour
         }
         stopped = true;
         Destroy(gameObject, destroyDelay);
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision with: " + other.name);
+        if (!targets.Contains(other.gameObject))
+        {
+            targets.Add(other.gameObject);
+            PlayerAttackInput.ApplyEffectsToTarget(gameObject.transform.forward, rb.linearVelocity.magnitude/2, other.gameObject);
+        }
     }
 }

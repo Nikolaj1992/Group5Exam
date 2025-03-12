@@ -44,9 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1b754181acdf4459873e8c3335cad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   projectile: {fileID: 900275717373480536, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
-  fireRate: 4
 --- !u!1 &1749001506509204307
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class BeamShooter : MonoBehaviour, IAttack
     
     public void ExecuteAttack(Transform muzzle, int amount)
     {
-        Debug.Log("Shooting " + amount + " beam(s)");
+        // Debug.Log("Shooting " + amount + " beam(s)");
         targets.Clear();
         raycastOrigins.Clear();
         raycastDirections.Clear();
@@ -37,12 +37,10 @@ public class BeamShooter : MonoBehaviour, IAttack
             { 
                 direction = muzzle.forward;
                 knockbackVector = direction;
-                Debug.Log("ONE");
             }
             else
             {
                 direction = GetRandomDirectionInCone(muzzle.forward, spreadAngle);
-                Debug.Log("MORE");
             }
             
             raycastOrigins.Add(origin);
@@ -50,7 +48,6 @@ public class BeamShooter : MonoBehaviour, IAttack
             
             if (Physics.Raycast(origin, direction, out RaycastHit hit, range))
             {
-                Debug.Log("IF");
                 // Debug.DrawRay(origin, direction * hit.distance, Color.red, 1.0f);
                 
                 // impact vfx effect
@@ -67,7 +64,6 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    Debug.Log("TARGET");
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
                     
                     // enable the code below to show the hitbox of each beam impact and have the target logged
@@ -108,7 +104,6 @@ public class BeamShooter : MonoBehaviour, IAttack
 
         if (amount > 1)
         {
-            Debug.Log("MULTI");
             foreach (Vector3 position in raycastDirections)
             {
                 knockbackVector += position;
@@ -117,8 +112,7 @@ public class BeamShooter : MonoBehaviour, IAttack
         }
         knockbackVector = knockbackVector.normalized;
         //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) PlayerAttackInput.ApplyEffectsToTargets(knockbackVector, 5, targets);
-        Debug.Log("END");
+        if (knockbackVector != Vector3.zero) PlayerAttackInput.ApplyEffectsToTargets(knockbackVector, 4, targets);
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)

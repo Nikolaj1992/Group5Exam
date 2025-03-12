@@ -75,9 +75,19 @@ public class PlayerAttackInput : MonoBehaviour
         }
     }
     
+    public static void ApplyEffectsToTarget(Vector3 knockbackDirection, float knockbackForce, GameObject target)
+    {
+            if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
+            {
+                EnemyEffectHandler EEH = target.GetComponent<EnemyEffectHandler>();
+                if (!EEH) return;
+                EEH.ApplyKnockback(knockbackDirection, knockbackForce);
+                EEH.DamageFlash();
+            }
+    }
+    
     public static void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
     {
-        Debug.Log("METHOD");
         foreach (GameObject target in targets)
         {
             if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)

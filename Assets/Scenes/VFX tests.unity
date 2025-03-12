@@ -856,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 8358818982562762107, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
       propertyPath: weaponPrefab
       value: 
-      objectReference: {fileID: 1749001506509204307, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      objectReference: {fileID: 1285472121}
     - target: {fileID: 8358818982562762107, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
       propertyPath: muzzleTransform
       value: 
@@ -1093,10 +1093,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1138752367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1884884171 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6001428668771054196, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
-  m_PrefabInstance: {fileID: 926688697}
+--- !u!1 &1285472121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1749001506509204307, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+  m_PrefabInstance: {fileID: 1706087195328448376}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2019410623
 GameObject:
@@ -1514,9 +1514,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6507815742824335648, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
-      propertyPath: cam
+      propertyPath: projectile
       value: 
-      objectReference: {fileID: 1884884171}
+      objectReference: {fileID: 900275717373480536, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
     - target: {fileID: 9053318641550118749, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.627782
@@ -1649,6 +1649,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 900275717373480536, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476973729015253656, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476973729015253656, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476973729015253656, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6423985394607157358, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
