@@ -1505,6 +1505,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: g_unique
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: l_amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: h_cooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: l_cooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: h_baseDamage
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: l_baseDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 803182413093876677, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
+      propertyPath: l_hasStatusEffectCondition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1749001506509204307, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
       propertyPath: m_Name
       value: Weapon01
@@ -1513,10 +1541,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6507815742824335648, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 900275717373480536, guid: 50aed4714f8851d4eb56191541d839f1, type: 3}
     - target: {fileID: 9053318641550118749, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.627782
