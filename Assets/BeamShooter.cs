@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
@@ -17,14 +18,10 @@ public class BeamShooter : MonoBehaviour, IAttack
     
     //TODO: move to general attack script
     private List<GameObject> targets = new List<GameObject>();
-
-    public void ExecuteAttack(Transform muzzle)
-    {
-        // only here to please the interface
-    }
     
-    public void ExecuteAttack(Transform muzzle, int shotAmount)
+    public void ExecuteAttack(Transform muzzle, int amount)
     {
+        Debug.Log("Shooting " + amount + " beam(s)");
         targets.Clear();
         raycastOrigins.Clear();
         raycastDirections.Clear();
@@ -32,17 +29,29 @@ public class BeamShooter : MonoBehaviour, IAttack
         
         // Use muzzlePoint position if assigned, otherwise use the script's transform position
         Vector3 origin = muzzle ? muzzle.position : transform.position;
-        
-        for (int i = 0; i < shotAmount; i++)
+
+        for (int i = 0; i < amount; i++)
         {
-            Vector3 direction = GetRandomDirectionInCone(muzzle.forward, spreadAngle);
+            Vector3 direction;
+            if (amount == 1)
+            { 
+                direction = muzzle.forward;
+                knockbackVector = direction;
+                Debug.Log("ONE");
+            }
+            else
+            {
+                direction = GetRandomDirectionInCone(muzzle.forward, spreadAngle);
+                Debug.Log("MORE");
+            }
             
             raycastOrigins.Add(origin);
             raycastDirections.Add(direction);
             
             if (Physics.Raycast(origin, direction, out RaycastHit hit, range))
             {
-                Debug.DrawRay(origin, direction * hit.distance, Color.red, 1.0f);
+                Debug.Log("IF");
+                // Debug.DrawRay(origin, direction * hit.distance, Color.red, 1.0f);
                 
                 // impact vfx effect
                 GameObject impact = Instantiate(impactPrefab, hit.point, Quaternion.identity) as GameObject;
@@ -58,10 +67,11 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
+                    Debug.Log("TARGET");
                     if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
                     
                     // enable the code below to show the hitbox of each beam impact and have the target logged
-                    Debug.Log("HIT: " + hitCollider.name);
+                    // Debug.Log("HIT: " + hitCollider.name);
                     // GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     // GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
                     // Destroy(sphereP);
@@ -90,19 +100,25 @@ public class BeamShooter : MonoBehaviour, IAttack
             }
             else
             {
-                Debug.DrawRay(origin, direction * range, Color.yellow, 1.0f);
+                // Debug.DrawRay(origin, direction * range, Color.yellow, 1.0f);
                 GameObject beam = Instantiate(beamPrefab, origin, Quaternion.LookRotation(direction)) as GameObject;
                 Destroy(beam, 0.5f);
             }
-        } 
-        foreach (Vector3 position in raycastDirections)
-        {
-            knockbackVector += position;
         }
-        knockbackVector = knockbackVector / raycastDirections.Count;
+
+        if (amount > 1)
+        {
+            Debug.Log("MULTI");
+            foreach (Vector3 position in raycastDirections)
+            {
+                knockbackVector += position;
+            }
+            knockbackVector = knockbackVector / raycastDirections.Count;
+        }
         knockbackVector = knockbackVector.normalized;
         //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) ApplyEffectsToTargets(knockbackVector, 5);
+        if (knockbackVector != Vector3.zero) PlayerAttackInput.ApplyEffectsToTargets(knockbackVector, 5, targets);
+        Debug.Log("END");
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)
@@ -121,29 +137,15 @@ public class BeamShooter : MonoBehaviour, IAttack
     }
     
     // Draw rays in Scene view for debugging
-    private void OnDrawGizmos()
-    {
-        if (raycastOrigins.Count == 0) return;
-        
-        Gizmos.color = Color.cyan;
-        
-        for (int i = 0; i < raycastOrigins.Count; i++)
-        {
-            Gizmos.DrawLine(raycastOrigins[i], raycastOrigins[i] + raycastDirections[i] * range);
-        }
-    }
-
-    void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce)
-    {
-        foreach (GameObject target in targets)
-        {
-            if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
-            {
-                EnemyEffectHandler EEH = target.GetComponent<EnemyEffectHandler>();
-                if (!EEH) return;
-                EEH.ApplyKnockback(knockbackDirection, knockbackForce);
-                EEH.DamageFlash();
-            }
-        }
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     if (raycastOrigins.Count == 0) return;
+    //     
+    //     Gizmos.color = Color.cyan;
+    //     
+    //     for (int i = 0; i < raycastOrigins.Count; i++)
+    //     {
+    //         Gizmos.DrawLine(raycastOrigins[i], raycastOrigins[i] + raycastDirections[i] * range);
+    //     }
+    // }
 }

@@ -16,20 +16,18 @@ public class PlayerAttackInput : MonoBehaviour
     
     // TODO: make variables for projectileAmount, cooldown and so on for both light and heavy
     // light: script and variables
-    public IAttack lightAttackScript;
-    // private string l_attackName; // no sure if this stays
+    [SerializeField] private IAttack lightAttackScript;
     private float l_baseDamage;
     private float l_damageMultiplier = 1;
     // private ENUM l_damageType;
     // private List<ENUM> l_statusEffects;  // need the statusEffect scripts, and is a list in case specific weapons will have multiple
     private bool l_hasStatusEffectCondition;
     private float l_cooldown;
-    private int l_amount = 3;
+    private int l_amount = 1;
     // private ENUM l_unique // yet to be made
     
     // heavy: script and variables
-    public IAttack heavyAttackScript;
-    // private string h_attackName; // no sure if this stays
+    [SerializeField] private IAttack heavyAttackScript;
     private float h_baseDamage;
     private float h_damageMultiplier = 1;
     // private ENUM h_damageType;
@@ -74,6 +72,21 @@ public class PlayerAttackInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             heavyAttackScript.ExecuteAttack(muzzle, h_amount);
+        }
+    }
+    
+    public static void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
+    {
+        Debug.Log("METHOD");
+        foreach (GameObject target in targets)
+        {
+            if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
+            {
+                EnemyEffectHandler EEH = target.GetComponent<EnemyEffectHandler>();
+                if (!EEH) return;
+                EEH.ApplyKnockback(knockbackDirection, knockbackForce);
+                EEH.DamageFlash();
+            }
         }
     }
 }
