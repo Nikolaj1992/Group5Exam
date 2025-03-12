@@ -61,6 +61,25 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else if (scene.name == gameScene)
+        {
+            SpawnPlayer();
+        }
+    }
+    
+    private void SpawnPlayer()
+    {
+        GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player"); // Player must be inside a "Resources" folder!
+        GameObject spawnPoint = GameObject.FindWithTag("PlayerSpawn");
+
+        if (playerPrefab != null && spawnPoint != null)
+        {
+            Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        }
+        else
+        {
+            Debug.LogError("Player prefab or spawn point is missing!");
+        }
     }
     
     public void AddScore(int amount)
@@ -94,8 +113,6 @@ public class GameManager : MonoBehaviour
     public void StartNewRound()
     {
         gameIsOver = false;
-        
-        // We should have reset logic here for player position, resetting puzzles ect.
         
         if (!string.IsNullOrEmpty(gameScene))
         {
