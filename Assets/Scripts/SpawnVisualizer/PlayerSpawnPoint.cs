@@ -6,7 +6,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         // Just to let us see the actual spawn point
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, 1f);
+        Gizmos.DrawSphere(transform.position, 0.8f);
     }
     
 }
