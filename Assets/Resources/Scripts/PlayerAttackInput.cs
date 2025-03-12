@@ -19,25 +19,27 @@ public class PlayerAttackInput : MonoBehaviour
     public IAttack lightAttackScript;
     // private string l_attackName; // no sure if this stays
     private float l_baseDamage;
-    private float l_damageMultiplier;
-    private float l_damageType;
+    private float l_damageMultiplier = 1;
+    // private ENUM l_damageType;
     // private List<ENUM> l_statusEffects;  // need the statusEffect scripts, and is a list in case specific weapons will have multiple
     private bool l_hasStatusEffectCondition;
     private float l_cooldown;
-    private int l_amount = 1;
+    private int l_amount = 3;
     // private ENUM l_unique // yet to be made
     
     // heavy: script and variables
     public IAttack heavyAttackScript;
     // private string h_attackName; // no sure if this stays
     private float h_baseDamage;
-    private float h_damageMultiplier;
-    private float h_damageType;
+    private float h_damageMultiplier = 1;
+    // private ENUM h_damageType;
     // private List<ENUM> h_statusEffects;  // need the statusEffect scripts, and is a list in case specific weapons will have multiple
     private bool h_hasStatusEffectCondition;
     private float h_cooldown;
     private int h_amount = 1;
     // private ENUM h_unique // yet to be made
+    
+    // TODO: start on the armor
 
     private void Awake()
     {

@@ -903,13 +903,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2900033098170377493, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1200414517}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3793166088987344940, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1501575821}
-    - targetCorrespondingSourceObject: {fileID: 3793166088987344940, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1501575822}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
 --- !u!1 &1064402706
 GameObject:
@@ -1099,41 +1093,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1138752367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1501575820 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3793166088987344940, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
-  m_PrefabInstance: {fileID: 926688697}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1501575821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501575820}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1b754181acdf4459873e8c3335cad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  fireRate: 4
---- !u!114 &1501575822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501575820}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c3945a3d7e2094f8a4624f6b7353a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spreadAngle: 15
-  range: 25
-  beamPrefab: {fileID: 0}
-  impactPrefab: {fileID: 0}
 --- !u!20 &1884884171 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6001428668771054196, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
