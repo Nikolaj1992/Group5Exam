@@ -13,34 +13,16 @@ public class PlayerAttackInput : MonoBehaviour
 
     public GameObject weaponPrefab;
     public Transform muzzle;
+
+    public WeaponInfo weaponInfo;
+    private IAttack lightAttackScript;
+    private IAttack heavyAttackScript;
     
-    // TODO: make variables for projectileAmount, cooldown and so on for both light and heavy
-    // light: script and variables
-    [SerializeField] private IAttack lightAttackScript;
-    private float l_baseDamage;
-    private float l_damageMultiplier = 1;
-    // private ENUM l_damageType;
-    // private List<ENUM> l_statusEffects;  // need the statusEffect scripts, and is a list in case specific weapons will have multiple
-    private bool l_hasStatusEffectCondition;
-    private float l_cooldown;
-    private int l_amount = 1;
-    // private ENUM l_unique // yet to be made
-    
-    // heavy: script and variables
-    [SerializeField] private IAttack heavyAttackScript;
-    private float h_baseDamage;
-    private float h_damageMultiplier = 1;
-    // private ENUM h_damageType;
-    // private List<ENUM> h_statusEffects;  // need the statusEffect scripts, and is a list in case specific weapons will have multiple
-    private bool h_hasStatusEffectCondition;
-    private float h_cooldown;
-    private int h_amount = 1;
-    // private ENUM h_unique // yet to be made
-    
-    // TODO: start on the armor
+    // TODO: start on the armor, possible rename file or create a new one to handle armor
 
     private void Awake()
     {
+        weaponInfo = weaponPrefab.transform.GetChild(0).GetComponent<WeaponInfo>();
         lightAttackScript = weaponPrefab.transform.GetChild(1).GetComponent<IAttack>();
         heavyAttackScript = weaponPrefab.transform.GetChild(2).GetComponent<IAttack>();
     }
@@ -67,11 +49,11 @@ public class PlayerAttackInput : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            lightAttackScript.ExecuteAttack(muzzle,l_amount);
+            lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            heavyAttackScript.ExecuteAttack(muzzle, h_amount);
+            heavyAttackScript.ExecuteAttack(muzzle, weaponInfo.h_amount);
         }
     }
     

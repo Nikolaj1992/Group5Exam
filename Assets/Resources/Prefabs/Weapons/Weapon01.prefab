@@ -89,6 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321053794562229709}
+  - component: {fileID: 803182413093876677}
   m_Layer: 0
   m_Name: StatInfo
   m_TagString: Untagged
@@ -111,6 +112,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9053318641550118749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &803182413093876677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560347449954308201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3645c515ea5e6564eb69d6f36b06307a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  g_disabled: 0
+  g_unique: 2
+  l_baseDamage: 7
+  l_damageMultiplier: 1
+  l_hasStatusEffectCondition: 1
+  l_cooldown: 1
+  l_amount: 3
+  h_baseDamage: 45
+  h_damageMultiplier: 1
+  h_hasStatusEffectCondition: 0
+  h_cooldown: 5
+  h_amount: 1
 --- !u!1 &4953525103866567086
 GameObject:
   m_ObjectHideFlags: 0
