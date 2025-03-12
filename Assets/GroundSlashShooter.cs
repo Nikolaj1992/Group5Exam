@@ -1,29 +1,44 @@
 using UnityEngine;
 
-public class GroundSlashShooter : MonoBehaviour, IAttack
+public class GroundSlashShooter : MonoBehaviour
 {
-    [SerializeField] private GameObject projectile;
-    // public float fireRate = 4;
+    public Camera cam;
+    public GameObject projectile;
+    public Transform firePoint;
+    public float fireRate = 4;
     
     private Vector3 destination;
 
-    // private float timeToFire;
+    private float timeToFire;
     private GroundSlash groundSlashScript;
     
-    public void ExecuteAttack(Transform muzzle, int amount) // doesn't use amount
+    void Update()
     {
-        Ray ray = new Ray(muzzle.position, muzzle.forward);
-        destination = ray.GetPoint(1000);
-        InstantiateProjectile(muzzle);
+        if (Input.GetKeyDown(KeyCode.R) && Time.time > timeToFire)
+        {
+            timeToFire = Time.time + 1/fireRate;
+            ShootProjectile();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gameObject.GetComponent<BeamShooter>().FireShots(3);
+        }
     }
 
-    void InstantiateProjectile(Transform muzzle)
+    void ShootProjectile()
     {
-        var projectileObj = Instantiate(projectile, muzzle.position, muzzle.rotation) as GameObject;
+        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        destination = ray.GetPoint(1000);
+        InstantiateProjectile();
+    }
+
+    void InstantiateProjectile()
+    {
+        var projectileObj = Instantiate(projectile, firePoint.position, Quaternion.identity) as GameObject;
 
         groundSlashScript = projectileObj.GetComponent<GroundSlash>();
         RotateToDestination(projectileObj, destination, true);
-        projectileObj.GetComponent<Rigidbody>().linearVelocity = muzzle.forward * groundSlashScript.speed;
+        projectileObj.GetComponent<Rigidbody>().linearVelocity = transform.forward * groundSlashScript.speed;
     }
 
     void RotateToDestination(GameObject obj, Vector3 destination, bool onlyY)
