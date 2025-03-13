@@ -41,17 +41,16 @@ public class PlayerArmor : MonoBehaviour
                     {
                         targets.Add(attacker, 1);
                         Debug.Log("first time seeing " + attacker.name);
-                        break;
                     }
                     break;
             }
             damage *= (1 - (armorInfo.g_damageReduction/100));
-            Debug.Log("Q-DMG: " + damage);
+            Debug.Log("Q-ARMOR: " + damage);
         }
         else
         {
             damage *= (1 - (armorInfo.g_damageReduction/100));
-            Debug.Log("NQ-DMG: " + damage);
+            Debug.Log("NQ-ARMOR: " + damage);
         }
     }
 }

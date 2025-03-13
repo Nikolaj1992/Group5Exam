@@ -93,7 +93,7 @@ public class WeaponEditor : Editor
             case WeaponInfo.Unique.Unpredictable:
                 return "20% chance for 1 out of 3 effects.";
             case WeaponInfo.Unique.Fulfilling_Fire:
-                return "Hitting all light attack shots on a single target sets them on fire.";
+                return "Hitting all light attack shots on a single target sets them on fire, and deals 25% more damage to burning targets.";
             default:
                 return "Unknown unique ability.";
         }

@@ -50,12 +50,30 @@ public class PlayerAttack : MonoBehaviour
             if (weaponInfo.g_unique != WeaponInfo.Unique.None)
             {
                 Debug.Log(weaponInfo.g_unique);
+                HandleUnique(true);
             }
-            lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
+            else
+            { 
+                lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
+            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             heavyAttackScript.ExecuteAttack(muzzle, weaponInfo.h_amount);
+        }
+    }
+
+    void HandleUnique(bool lightAttack)
+    {
+        float damage = lightAttack ? weaponInfo.l_baseDamage : weaponInfo.h_baseDamage;
+        switch (weaponInfo.g_unique)
+        {
+            case WeaponInfo.Unique.Unpredictable:
+                Debug.Log("Q-WEAPON: " + damage);
+                break;
+            case WeaponInfo.Unique.Fulfilling_Fire:
+                Debug.Log("Q-WEAPON: " + damage);
+                break;
         }
     }
     
