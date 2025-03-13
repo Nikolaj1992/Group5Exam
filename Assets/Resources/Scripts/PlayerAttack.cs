@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerAttackInput : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     // public event Action StrafeStart;
     // public event Action StrafeEnd;
@@ -14,11 +14,9 @@ public class PlayerAttackInput : MonoBehaviour
     public GameObject weaponPrefab;
     public Transform muzzle;
 
-    public WeaponInfo weaponInfo;
+    private WeaponInfo weaponInfo;
     private IAttack lightAttackScript;
     private IAttack heavyAttackScript;
-    
-    // TODO: start on the armor, possible rename file or create a new one to handle armor
 
     private void Awake()
     {
@@ -49,6 +47,10 @@ public class PlayerAttackInput : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (weaponInfo.g_unique != WeaponInfo.Unique.None)
+            {
+                Debug.Log(weaponInfo.g_unique);
+            }
             lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
         }
         if (Input.GetKeyDown(KeyCode.R))

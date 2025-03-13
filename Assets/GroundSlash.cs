@@ -66,11 +66,11 @@ public class GroundSlash : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision with: " + other.name);
         if (!targets.Contains(other.gameObject))
-        {
+        { 
+            Debug.Log("H-HIT: " + other.name);
             targets.Add(other.gameObject);
-            PlayerAttackInput.ApplyEffectsToTarget(gameObject.transform.forward, rb.linearVelocity.magnitude/2, other.gameObject);
+            PlayerAttack.ApplyEffectsToTarget(gameObject.transform.forward, rb.linearVelocity.magnitude/2, other.gameObject);
         }
     }
 }

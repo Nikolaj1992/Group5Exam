@@ -64,10 +64,13 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject)) targets.Add(hitCollider.gameObject);
+                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject))
+                    {
+                        Debug.Log("L-HIT: " + hitCollider.name);
+                        targets.Add(hitCollider.gameObject);
+                    }
                     
                     // enable the code below to show the hitbox of each beam impact and have the target logged
-                    // Debug.Log("HIT: " + hitCollider.name);
                     // GameObject sphereP = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     // GameObject sphere = Instantiate(sphereP, hit.point, Quaternion.identity);
                     // Destroy(sphereP);
@@ -112,7 +115,7 @@ public class BeamShooter : MonoBehaviour, IAttack
         }
         knockbackVector = knockbackVector.normalized;
         //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) PlayerAttackInput.ApplyEffectsToTargets(knockbackVector, 4, targets);
+        if (knockbackVector != Vector3.zero) PlayerAttack.ApplyEffectsToTargets(knockbackVector, 4, targets);
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)
