@@ -473,6 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32462e9c1a034749a26ceab16e55795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
+=======
+  healthHandler: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1001 &1630963119
 PrefabInstance:
   m_ObjectHideFlags: 0
