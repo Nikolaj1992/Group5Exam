@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private GameObject mainMenu;
     private GameObject loadoutMenu;
     
+    public GameObject enemySpawnerPrefab;
+    
     private void Start()
     {
         if (string.IsNullOrEmpty(gameScene))
@@ -64,6 +66,10 @@ public class GameManager : MonoBehaviour
         else if (scene.name == gameScene)
         {
             SpawnPlayer();
+            if (enemySpawnerPrefab != null)
+            {
+                Instantiate(enemySpawnerPrefab);
+            }
         }
     }
     

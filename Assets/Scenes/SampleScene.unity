@@ -491,13 +491,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3319603266585611353, guid: 46abe1d61c5075a4c8d6b7c06b81bd22, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3601686085471111668, guid: 46abe1d61c5075a4c8d6b7c06b81bd22, type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 3601686085471111668, guid: 46abe1d61c5075a4c8d6b7c06b81bd22, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4042594388011830354, guid: 46abe1d61c5075a4c8d6b7c06b81bd22, type: 3}
       propertyPath: m_LocalPosition.x
