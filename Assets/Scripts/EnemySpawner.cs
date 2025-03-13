@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     
     [Header("Spawn Settings")]
     public GameObject[] enemyPrefabs;
+    public GameObject enemySpawnEffectPrefab;
     private Transform player;
     public float minSpawnRadius = 30f;
     public float maxSpawnRadius = 40f;
@@ -40,6 +41,8 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             SpawnEnemy();
         }
+        
+        // Consider adding delay to spawn effect maybe?
     }
 
     private void SpawnEnemy()
@@ -74,6 +77,12 @@ public class EnemySpawner : MonoBehaviour
 
         if (validPosition)
         {
+            if (enemySpawnEffectPrefab != null)
+            {
+                GameObject spawnEffect = Instantiate(enemySpawnEffectPrefab, spawnPosition, Quaternion.identity);
+                Destroy(spawnEffect, 3f);
+            }
+            
             GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
             Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
         }
