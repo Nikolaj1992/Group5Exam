@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 1607374866568431844}
   - component: {fileID: 8358818982562762107}
   - component: {fileID: -4728668993815915411}
+  - component: {fileID: 8672241376116404387}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -190,6 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9248417010f44994f9e37ec4894aed10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 0}
+  muzzle: {fileID: 0}
 --- !u!114 &-4728668993815915411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +205,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd40f51f178fb541aa2c9b4760f837a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &8672241376116404387
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793166088987344940}
+  m_Enabled: 1
 --- !u!1001 &1515290090752966741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,6 +221,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4592236102938271547}
     m_Modifications:
+    - target: {fileID: 5066056848955781664, guid: b7eae9b5810504a4490b902372d94613, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5066056848955781667, guid: b7eae9b5810504a4490b902372d94613, type: 3}
       propertyPath: m_Name
       value: PlayerCamera
