@@ -42,8 +42,16 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
         }
         
-        // Consider adding delay to spawn effect maybe?
     }
+    
+    private IEnumerator SpawnEnemyAfterDelay(Vector3 position, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        Instantiate(enemyToSpawn, position, Quaternion.identity);
+    }
+
 
     private void SpawnEnemy()
     {
@@ -77,14 +85,22 @@ public class EnemySpawner : MonoBehaviour
 
         if (validPosition)
         {
+            GameObject spawnEffect = null;
             if (enemySpawnEffectPrefab != null)
             {
-                GameObject spawnEffect = Instantiate(enemySpawnEffectPrefab, spawnPosition, Quaternion.identity);
-                Destroy(spawnEffect, 3f);
+                spawnEffect = Instantiate(enemySpawnEffectPrefab, spawnPosition, Quaternion.identity);
+                Destroy(spawnEffect, 4.5f);
+                
+                AudioSource audioSource = spawnEffect.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
             }
             
-            GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            // GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            // Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            StartCoroutine(SpawnEnemyAfterDelay(spawnPosition, 1f));
         }
     }
     

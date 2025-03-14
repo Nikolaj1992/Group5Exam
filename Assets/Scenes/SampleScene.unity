@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7609233576593844440, guid: 564611736cb3cb74188059fd59e5ac6b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
