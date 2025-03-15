@@ -20,7 +20,7 @@ public class WowCamera : MonoBehaviour
     [SerializeField] private int zoomRate = 40;
 
     [SerializeField] private float rotationDampening = 3.0f;
-    [SerializeField] private float zoomDampening = 5.0f;
+    // [SerializeField] private float zoomDampening = 5.0f;
 
     [SerializeField] private LayerMask collisionLayers = -1;
 
@@ -29,7 +29,7 @@ public class WowCamera : MonoBehaviour
     private float currentDistance;
     private float desiredDistance;
     private float correctedDistance;
-    private bool m_rightClicking;
+    // private bool m_rightClicking;
     private bool m_freeLookMode;
 
     void Awake()
@@ -45,7 +45,7 @@ public class WowCamera : MonoBehaviour
         desiredDistance = distance;
         correctedDistance = distance;
 
-        m_rightClicking = true;
+        // m_rightClicking = true;
 
         // Make the rigid body not change rotation
         if (this.gameObject.GetComponent<Rigidbody>())

@@ -7,7 +7,7 @@ public class AnimationHandler : MonoBehaviour
 {
     [SerializeField] private Animator m_anim;
     [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerAttackInput playerAttack;
+    [SerializeField] private PlayerAttack playerAttack;
 
     private void Awake() 
     {
