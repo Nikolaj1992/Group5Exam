@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private GameObject loadoutMenu;
     
     public GameObject enemySpawnerPrefab;
+    public GameObject fogManagerPrefab;
     
     private void Start()
     {
@@ -69,6 +70,10 @@ public class GameManager : MonoBehaviour
             if (enemySpawnerPrefab != null)
             {
                 Instantiate(enemySpawnerPrefab);
+            }
+            if (fogManagerPrefab != null)
+            {
+                Instantiate(fogManagerPrefab);
             }
         }
     }
