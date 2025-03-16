@@ -9,9 +9,6 @@ public class FogController : MonoBehaviour
     
     private GameObject lightFogInstance;
     private GameObject denseFogInstance;
-
-    // public float lightFogRadius = 10f; // Radius of Light Fog around our wizard
-    // public float denseFogRadius = 20f; // Radius of Dense Fog around our wizard
     
     private void Start()
     {
@@ -50,52 +47,21 @@ public class FogController : MonoBehaviour
     {
         if (player == null || lightFogInstance == null || denseFogInstance == null) return;
         
-        lightFogInstance.transform.position = player.position;
-        denseFogInstance.transform.position = player.position;
+        // Should make the fog have a slightly realistic drift to it
+        Vector3 jitterOffset = new Vector3(
+            Mathf.PerlinNoise(Time.time * 0.5f, 0f) * 0.5f - 0.25f,
+            0f, 
+            Mathf.PerlinNoise(0f, Time.time * 0.5f) * 0.5f - 0.25f
+        );
         
-        // Offset positions outward from the player, to move fog "outward" and not ON the player
-        // Vector3 playerPos = player.position;
-        //
-        // Vector3 lightFogOffset = GetCirclePosition(playerPos, (lightFogRadius + denseFogRadius) / 2f);
-        // Vector3 denseFogOffset = GetCirclePosition(playerPos, (denseFogRadius + 40f) / 2f);
+        Vector3 targetPosition = player.position + jitterOffset;
+
+        lightFogInstance.transform.position = targetPosition;
+        denseFogInstance.transform.position = targetPosition;
         
-        // lightFogInstance.transform.position = Vector3.Lerp(lightFogInstance.transform.position, lightFogOffset, Time.deltaTime * 3f);
-        // denseFogInstance.transform.position = Vector3.Lerp(denseFogInstance.transform.position, denseFogOffset, Time.deltaTime * 3f);
-        
-        // Dynamic shape adjustments... hopefully this works as intended
-        // AdjustFogSize(lightFogInstance, lightFogRadius);
-        // AdjustFogSize(denseFogInstance, denseFogRadius);
+        // Rotation effect
+        lightFogInstance.transform.Rotate(Vector3.up, Time.deltaTime * 5f);
+        denseFogInstance.transform.Rotate(Vector3.up, Time.deltaTime * 3f);
     }
-    
-    // private Vector3 GetCirclePosition(Vector3 center, float radius)
-    // {
-    //     float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-    //     float x = Mathf.Cos(angle) * radius;
-    //     float z = Mathf.Sin(angle) * radius;
-    //     return new Vector3(center.x + x, center.y, center.z + z);
-    // }
-    //
-    // private void AdjustFogSize(GameObject fogObject, float radius)
-    // {
-    //     ParticleSystem fogParticleSystem = fogObject.GetComponentInChildren<ParticleSystem>();
-    //     if (fogParticleSystem != null)
-    //     {
-    //         var shape = fogParticleSystem.shape;
-    //         shape.radius = radius;
-    //     }
-    // }
-    //
-    // private void OnDrawGizmos()
-    // {
-    //     if (player == null) return;
-    //
-    //     // Radius of light fog/mist
-    //     Gizmos.color = new Color(1, 0, 0, 0.3f);
-    //     Gizmos.DrawWireSphere(player.position, lightFogRadius);
-    //
-    //     // Radius of dense fog
-    //     Gizmos.color = new Color(0,1,0,0.3f);
-    //     Gizmos.DrawWireSphere(player.position, denseFogRadius);
-    // }
     
 }
