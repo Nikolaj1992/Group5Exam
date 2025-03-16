@@ -44,7 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c23f7e6247468044a677225bd09bdd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightFog: {fileID: 6479397275958738455, guid: cdc35e4dac3bd514db8d0444d484b1e4, type: 3}
-  denseFog: {fileID: 4792873914966188433, guid: 11f84194c0284154e87f1d52c2916f19, type: 3}
-  lightFogRadius: 10
-  denseFogRadius: 20
+  lightFog: {fileID: 6970827997219035069, guid: bc2b8ba9a4e921f44a572479eda6d597, type: 3}
+  denseFog: {fileID: 1831777041719417570, guid: 88fa986618341c24eb3e91cfbc524614, type: 3}

@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - lightFog: {fileID: 6479397275958738455, guid: cdc35e4dac3bd514db8d0444d484b1e4, type: 3}
-  - denseFog: {fileID: 4792873914966188433, guid: 11f84194c0284154e87f1d52c2916f19, type: 3}
+  - lightFog: {fileID: 6970827997219035069, guid: bc2b8ba9a4e921f44a572479eda6d597, type: 3}
+  - denseFog: {fileID: 1831777041719417570, guid: 88fa986618341c24eb3e91cfbc524614, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
