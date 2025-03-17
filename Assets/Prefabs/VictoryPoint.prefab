@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1860306163299892111}
   m_Layer: 0
   m_Name: VictoryPoint
-  m_TagString: Untagged
+  m_TagString: VictoryGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -9,6 +9,13 @@ public class LeverPuzzleScript : MonoBehaviour
     private List<bool> leverStates = new List<bool>();
     // True means the lever is pointing down, False means the lever is pointing up
     
+    private GameManager gameManager;
+    
+    void Start()
+    {
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+    }
+    
     void Awake()
     {
         for (int i = 0; i < gameObject.transform.Find("Levers").childCount; i++)
@@ -59,6 +66,7 @@ public class LeverPuzzleScript : MonoBehaviour
         {
             DeactivateLevers();
             Debug.Log("WON");
+            gameManager.PuzzleSolved();
         }
     }
 
