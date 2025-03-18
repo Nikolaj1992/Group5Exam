@@ -276,6 +276,8 @@ GameObject:
   - component: {fileID: 181699970}
   - component: {fileID: 181699969}
   - component: {fileID: 181699975}
+  - component: {fileID: 181699977}
+  - component: {fileID: 181699976}
   m_Layer: 10
   m_Name: Dummy01
   m_TagString: Untagged
@@ -427,6 +429,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+--- !u!114 &181699976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181699968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6688028eeba22f84588ababb7f464845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 0
+  speed: 0
+--- !u!114 &181699977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181699968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51b33c1e7d786445acc87debc603709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 8748240595049802585, guid: 9f7246ce4e510d244bea87053d57bef1, type: 3}
+  maxHealth: 100
+  alive: 0
+  generalDamageResistance: 0
+  impactResistance: 0
+  elementalResistance: 0
 --- !u!1 &816163307
 GameObject:
   m_ObjectHideFlags: 0
