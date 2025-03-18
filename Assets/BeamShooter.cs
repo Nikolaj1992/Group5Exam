@@ -115,7 +115,14 @@ public class BeamShooter : MonoBehaviour, IAttack
         }
         knockbackVector = knockbackVector.normalized;
         //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) PlayerAttack.ApplyEffectsToTargets(knockbackVector, 4, targets);
+        if (knockbackVector == Vector3.zero) return;
+        PlayerAttack playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        if (playerAttack == null) return;
+        playerAttack.ApplyEffectsToTargets(knockbackVector, 4, targets);
+        foreach (GameObject target in targets)
+        {
+            playerAttack.HandleUniqueAndDamageTarget(true, target);
+        }
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)

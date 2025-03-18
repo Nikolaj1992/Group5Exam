@@ -92,8 +92,8 @@ public class WeaponEditor : Editor
                 return "No unique ability.";
             case WeaponInfo.Unique.Unpredictable:
                 return "20% chance for 1 out of 3 effects.";
-            case WeaponInfo.Unique.Fulfilling_Fire:
-                return "Hitting all light attack shots on a single target applies a damage over time effect.";
+            case WeaponInfo.Unique.Lingering:
+                return "Light attacks applies a damage over time effect, dealing 10% of the original 3 times.";
             default:
                 return "Unknown unique ability.";
         }

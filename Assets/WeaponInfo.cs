@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WeaponInfo : MonoBehaviour
 {
-    public enum Unique {None, Unpredictable, Fulfilling_Fire}
+    public enum Unique {None, Unpredictable, Lingering}
     // TODO: add methods to handle each Unique in the player attack script
     
     // general

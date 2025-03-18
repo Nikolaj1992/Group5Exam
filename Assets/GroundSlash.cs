@@ -70,7 +70,10 @@ public class GroundSlash : MonoBehaviour
         { 
             Debug.Log("H-HIT: " + other.name);
             targets.Add(other.gameObject);
-            PlayerAttack.ApplyEffectsToTarget(gameObject.transform.forward, rb.linearVelocity.magnitude/2, other.gameObject);
+            PlayerAttack playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+            if (playerAttack == null) return;
+            playerAttack.ApplyEffectsToTarget(gameObject.transform.forward, rb.linearVelocity.magnitude/2, other.gameObject);
+            playerAttack.HandleUniqueAndDamageTarget(false, other.gameObject);
         }
     }
 }

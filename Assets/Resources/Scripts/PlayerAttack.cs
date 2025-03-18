@@ -47,15 +47,7 @@ public class PlayerAttack : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (weaponInfo.g_unique != WeaponInfo.Unique.None)
-            {
-                Debug.Log(weaponInfo.g_unique);
-                HandleUnique(true);
-            }
-            else
-            { 
                 lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
-            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -63,21 +55,37 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    void HandleUnique(bool lightAttack)
+    public void HandleUniqueAndDamageTarget(bool lightAttack, GameObject target)
     {
+        if (target == null) return;
+        HealthHandler t_HH = target.GetComponent<HealthHandler>();
+        if (t_HH == null) return;
+        StatusEffectHandler t_SEH = target.GetComponent<StatusEffectHandler>();
+        if (t_SEH == null) return;
         float damage = lightAttack ? weaponInfo.l_baseDamage : weaponInfo.h_baseDamage;
+        
         switch (weaponInfo.g_unique)
         {
             case WeaponInfo.Unique.Unpredictable:
-                Debug.Log("Q-WEAPON: " + damage);
+                Debug.Log("Q-U-WEAPON: " + damage);
                 break;
-            case WeaponInfo.Unique.Fulfilling_Fire:
-                Debug.Log("Q-WEAPON: " + damage);
+            case WeaponInfo.Unique.Lingering:
+                Debug.Log("Q-L-WEAPON: " + damage);
+                if (lightAttack)
+                { 
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Impact); 
+                    t_HH.DealDamageOverTime(damage/10, HealthHandler.DamageType.Impact, 3);
+                }
+                else
+                {
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Elemental);
+                    t_SEH.ApplyStatusEffect(StatusEffect.premadeStatusEffects["aflame"]);
+                }
                 break;
         }
     }
     
-    public static void ApplyEffectsToTarget(Vector3 knockbackDirection, float knockbackForce, GameObject target)
+    public void ApplyEffectsToTarget(Vector3 knockbackDirection, float knockbackForce, GameObject target)
     {
             if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
             {
@@ -88,7 +96,7 @@ public class PlayerAttack : MonoBehaviour
             }
     }
     
-    public static void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
+    public void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
     {
         foreach (GameObject target in targets)
         {
