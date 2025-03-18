@@ -127,10 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 627130729053616732, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2
-      objectReference: {fileID: 0}
     - target: {fileID: 1877451527461052427, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -171,6 +167,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943298039636821544, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270201661123035305, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6376925105175461462, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
       propertyPath: m_Name
       value: LeverPuzzle
@@ -181,7 +185,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7284085894497976714, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070589922214036274, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958369714813551806, guid: 019618e6584fb9f45ba44efc34733318, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
