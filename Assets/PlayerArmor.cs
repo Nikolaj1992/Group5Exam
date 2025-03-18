@@ -14,9 +14,9 @@ public class PlayerArmor : MonoBehaviour
     private void Awake()
     {
         armorInfo = armorPrefab.transform.GetChild(0).GetComponent<ArmorInfo>();
-        Debug.Log(armorInfo.g_unique);
-        Debug.Log(armorInfo.g_healthIncrease);
-        Debug.Log(armorInfo.g_damageReduction);
+        Debug.Log("Armor unique: " + armorInfo.g_unique);
+        Debug.Log("Armor health increase: " + armorInfo.g_healthIncrease + "hp");
+        Debug.Log("Armor damage reduction" + armorInfo.g_damageReduction + "%");
     }
 
     public void DamagePlayer(float damage, GameObject attacker)
