@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -68,6 +70,19 @@ public class PlayerAttack : MonoBehaviour
         {
             case WeaponInfo.Unique.Unpredictable:
                 Debug.Log("Q-U-WEAPON: " + damage);
+                if (lightAttack)
+                { 
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Impact);
+                    if (Random.Range(0f, 5f) == 0)
+                    {
+                        StatusEffect randomStatusEffect = StatusEffect.premadeStatusEffects.ElementAt(Random.Range(0, StatusEffect.premadeStatusEffects.Count)).Value;
+                        t_SEH.ApplyStatusEffect(randomStatusEffect);
+                    }
+                }
+                else
+                {
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Piercing);
+                }
                 break;
             case WeaponInfo.Unique.Lingering:
                 Debug.Log("Q-L-WEAPON: " + damage);
