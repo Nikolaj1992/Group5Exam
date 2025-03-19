@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int playerScore = 0;
     [SerializeField] private int enemiesKilled = 0;
+    
+    [SerializeField] private int totalPuzzles = 1;  // Change this if more puzzles are added
+    private int completedPuzzles = 0;
 
     public string gameScene = "SampleScene";    // Handle target scene in inspector
     
@@ -90,6 +93,40 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.LogError("Player prefab or spawn point is missing!");
+        }
+    }
+    
+    public void PuzzleSolved()
+    {
+        completedPuzzles++;
+        if (completedPuzzles >= totalPuzzles)
+        {
+            OpenVictoryGate();
+        }
+    }
+    
+    private void OpenVictoryGate()
+    {
+        GameObject gateRight = GameObject.Find("GateParentRight");
+        GameObject gateLeft = GameObject.Find("GateParentLeft");
+        
+        if (gateRight != null && gateLeft != null)
+        {
+            Animator rightGateAnimator = gateRight.GetComponent<Animator>();
+            Animator leftGateAnimator = gateLeft.GetComponent<Animator>();
+
+            if (rightGateAnimator != null)
+            {
+                rightGateAnimator.SetTrigger("RightGateOpen");
+            }
+            if (leftGateAnimator != null)
+            {
+                leftGateAnimator.SetTrigger("LeftGateOpen");
+            }
+        }
+        else
+        {
+            Debug.LogError("GateRight or GateLeft not found!");
         }
     }
     
