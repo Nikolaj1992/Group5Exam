@@ -295,8 +295,8 @@ MonoBehaviour:
   m_UIInfos: {fileID: 114340500867371532}
   m_CustomAttributes: []
   m_ParameterInfo:
-  - name: Color01
-    path: Color01
+  - name: Color1
+    path: Color1
     tooltip: 
     space: -1
     spaceable: 0
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614563}
-  m_ExposedName: Color01
+  m_ExposedName: Color1
   m_Exposed: 1
   m_Order: 0
   m_Category: 
@@ -1657,12 +1657,6 @@ MonoBehaviour:
     - outputSlot: {fileID: 8926484042661614563}
       inputSlot: {fileID: 8926484042661614612}
     position: {x: 1655, y: 835}
-    expandedSlots: []
-    expanded: 1
-    supecollapsed: 0
-  - m_Id: 2
-    linkedSlots: []
-    position: {x: 914.29614, y: 855.6698}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0

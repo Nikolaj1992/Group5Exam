@@ -23,11 +23,9 @@ public class EnemyAttackType2 : MonoBehaviour
         {
             if (Time.time - lastAttackTime >= attackInterval)
             {
-                Debug.Log("AA: " + muzzle.position);
                 lastAttackTime = Time.time; // Update last attack time
                 // other.GetComponent<PlayerArmor>().DamagePlayer(damage, gameObject);
                 Debug.Log(gameObject.name + " - dealing " + damage + " damage to Player");
-                Debug.Log("A: " + muzzle.position);
                 attackScript.ExecuteAttack(muzzle, 1);
             }
         }
