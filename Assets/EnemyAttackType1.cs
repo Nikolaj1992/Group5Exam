@@ -5,7 +5,7 @@ public class EnemyAttackType1 : MonoBehaviour
 {
     public float damage;
     private float lastAttackTime = 0f;
-    private float attackInterval = 1.5f; // Time between attacks
+    public float attackInterval = 1.5f; // Time between attacks
     
     void OnTriggerStay(Collider other)
     {

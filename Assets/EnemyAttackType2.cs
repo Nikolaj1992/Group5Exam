@@ -5,7 +5,7 @@ public class EnemyAttackType2 : MonoBehaviour
 {
     public float damage;
     private float lastAttackTime = 0f;
-    private float attackInterval = 3f; // Time between attacks
+    public float attackInterval = 3f; // Time between attacks
     private Transform muzzle;
     private IAttack attackScript;
     private bool shouldAttack = false;

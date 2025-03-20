@@ -93,7 +93,7 @@ public class WeaponEditor : Editor
             case WeaponInfo.Unique.Unpredictable:
                 return "20% chance for 1 out of 3 effects.";
             case WeaponInfo.Unique.Lingering:
-                return "Light attacks applies a damage over time effect, dealing 10% of the original 3 times.";
+                return "Light attacks applies a damage over time effect, dealing 15% of the original 3 times.";
             default:
                 return "Unknown unique ability.";
         }

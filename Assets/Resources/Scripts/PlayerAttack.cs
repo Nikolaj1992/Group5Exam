@@ -89,7 +89,7 @@ public class PlayerAttack : MonoBehaviour
                 if (lightAttack)
                 { 
                     t_HH.DealDamage(damage, HealthHandler.DamageType.Impact); 
-                    t_HH.DealDamageOverTime(damage/10, HealthHandler.DamageType.Impact, 3);
+                    t_HH.DealDamageOverTime(damage/(20/3), HealthHandler.DamageType.Impact, 3);
                 }
                 else
                 {
