@@ -16,13 +16,16 @@ public class AttackDeterminer : StateMachineBehaviour
 
         if (lightAttack > 0) 
         {
-            lightAttackIndex = (lightAttackIndex < (lightAttackCount - 1)) ? lightAttackIndex + 1 : 0;
-            animator.SetInteger("LightAttackIndex", lightAttackIndex);
+            // For attack variations later if we want
+            // lightAttackIndex = (lightAttackIndex < (lightAttackCount - 1)) ? lightAttackIndex + 1 : 0;
+            // animator.SetInteger("LightAttackIndex", lightAttackIndex);
+            animator.SetInteger("LightAttackIndex", 0);
         }
         else if (heavyAttack > 0) 
         {
-            heavyAttackIndex = (heavyAttackIndex < (heavyAttackCount - 1)) ? heavyAttackIndex + 1 : 0;
-            animator.SetInteger("HeavyAttackIndex", heavyAttackIndex);
+            // heavyAttackIndex = (heavyAttackIndex < (heavyAttackCount - 1)) ? heavyAttackIndex + 1 : 0;
+            // animator.SetInteger("HeavyAttackIndex", heavyAttackIndex);
+            animator.SetInteger("HeavyAttackIndex", 0);
         }
     }
 
