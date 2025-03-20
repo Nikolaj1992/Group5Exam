@@ -72,6 +72,11 @@ public class HealthHandler : MonoBehaviour
             health = 0;
             Debug.Log(gameObject.name + " has died.");
         }
+
+        if (gameObject.tag != "Player" && !alive)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public delegate void HealthChanged();
