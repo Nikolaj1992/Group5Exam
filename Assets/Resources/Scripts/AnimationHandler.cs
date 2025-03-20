@@ -14,6 +14,8 @@ public class AnimationHandler : MonoBehaviour
         playerMovement.Jumping += SetJumpAnimation;    
         playerMovement.Landing += SetLandingAnimation;
         // playerAttack.Attack += SetAttackAnimation;
+        playerAttack.LightAttack += SetLightAttackAnimation;
+        playerAttack.HeavyAttack += SetHeavyAttackAnimation;
     }
 
 
@@ -46,6 +48,10 @@ public class AnimationHandler : MonoBehaviour
     private void SetLandingAnimation() => m_anim.SetTrigger("Landing");
 
     private void SetAttackAnimation() => m_anim.SetTrigger("Attack");
+    
+    private void SetLightAttackAnimation() => m_anim.SetInteger("LightAttack", 1);
+    
+    private void SetHeavyAttackAnimation() => m_anim.SetInteger("HeavyAttack", 1);
 
 
     #region cleanup
@@ -55,6 +61,8 @@ public class AnimationHandler : MonoBehaviour
         playerMovement.Jumping -= SetJumpAnimation;    
         playerMovement.Landing -= SetLandingAnimation;
         // playerAttack.Attack -= SetAttackAnimation;
+        playerAttack.LightAttack -= SetLightAttackAnimation;  
+        playerAttack.HeavyAttack -= SetHeavyAttackAnimation;
     }
     #endregion
 }
