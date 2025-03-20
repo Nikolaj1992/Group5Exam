@@ -14,8 +14,11 @@ public class AnimationHandler : MonoBehaviour
         playerMovement.Jumping += SetJumpAnimation;    
         playerMovement.Landing += SetLandingAnimation;
         // playerAttack.Attack += SetAttackAnimation;
-        playerAttack.LightAttack += SetLightAttackAnimation;
-        playerAttack.HeavyAttack += SetHeavyAttackAnimation;
+        // playerAttack.LightAttack += SetLightAttackAnimation;
+        // playerAttack.HeavyAttack += SetHeavyAttackAnimation;
+        
+        playerAttack.LightAttack += SetAttackAnimation;
+        playerAttack.HeavyAttack += SetAttackAnimation;
     }
 
 
@@ -61,8 +64,10 @@ public class AnimationHandler : MonoBehaviour
         playerMovement.Jumping -= SetJumpAnimation;    
         playerMovement.Landing -= SetLandingAnimation;
         // playerAttack.Attack -= SetAttackAnimation;
-        playerAttack.LightAttack -= SetLightAttackAnimation;  
-        playerAttack.HeavyAttack -= SetHeavyAttackAnimation;
+        // playerAttack.LightAttack -= SetLightAttackAnimation;  
+        // playerAttack.HeavyAttack -= SetHeavyAttackAnimation;
+        playerAttack.LightAttack -= SetAttackAnimation;
+        playerAttack.HeavyAttack -= SetAttackAnimation;
     }
     #endregion
 }
