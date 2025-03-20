@@ -8,9 +8,12 @@ public class HealthBarUI : MonoBehaviour
     private Vector3 offset = new Vector3(0, 2.5f, 0); // Moves the health bar above the player
     private RectTransform healthBarTransform;
     private float fullWidth; // Stores the original full width of the health bar
+    private Camera playerCamera;
 
     private void Awake()
     {
+        playerCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<Camera>();
+        
         // Get HealthBarFill's RectTransform
         healthBarTransform = transform.Find("HealthBarBackground/HealthBarFill").GetComponent<RectTransform>();
 
@@ -37,6 +40,7 @@ public class HealthBarUI : MonoBehaviour
         {
             // Keep the health bar above the Player
             transform.position = parentTransform.position + offset;
+            transform.rotation = playerCamera.transform.rotation;
         }
     }
 

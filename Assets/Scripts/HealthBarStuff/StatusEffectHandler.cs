@@ -8,12 +8,12 @@ public class StatusEffectHandler : MonoBehaviour
     [HideInInspector] public float speed;
     public Dictionary<string, StatusEffect> statusEffects = new Dictionary<string, StatusEffect>();
     private HealthHandler healthHandler;
-    [HideInInspector] public StatusEffectIconHandler statusEffectIconHandler;
+    // [HideInInspector] public StatusEffectIconHandler statusEffectIconHandler;
 
     void Awake()
     {
         healthHandler = gameObject.GetComponent<HealthHandler>();
-        statusEffectIconHandler = gameObject.GetComponentInChildren<StatusEffectIconHandler>();
+        // statusEffectIconHandler = gameObject.GetComponentInChildren<StatusEffectIconHandler>();
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class StatusEffectHandler : MonoBehaviour
         if (!healthHandler.alive)
         {
             statusEffects.Clear();
-            statusEffectIconHandler.HideIcon();
+            // statusEffectIconHandler.HideIcon();
         }
         
         List<string> keys = new List<string>(statusEffects.Keys); // To avoid modifying dictionary while iterating
@@ -88,7 +88,7 @@ public class StatusEffectHandler : MonoBehaviour
                     healthHandler.DealDamageOverTime(damage, damageType, duration);
                 }
             }
-            statusEffectIconHandler.ShowIcon(statusEffectName);
+            // statusEffectIconHandler.ShowIcon(statusEffectName);
             Debug.Log($"Applied {statusEffectName} for {duration} seconds.");
         }
     }
@@ -98,7 +98,7 @@ public class StatusEffectHandler : MonoBehaviour
         if (statusEffects.ContainsKey(statusEffectName))
         {
             statusEffects.Remove(statusEffectName);
-            statusEffectIconHandler.HideIcon();
+            // statusEffectIconHandler.HideIcon();
             Debug.Log($"{statusEffectName} has expired.");
         }
     }
