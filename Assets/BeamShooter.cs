@@ -16,9 +16,16 @@ public class BeamShooter : MonoBehaviour, IAttack
     public GameObject beamPrefab;
     public GameObject impactPrefab;
     
-    //TODO: move to general attack script
     private List<GameObject> targets = new List<GameObject>();
-    
+
+    public bool equippedByEnemy = false;
+    private LayerMask layerOfTarget;
+
+    private void Awake()
+    {
+        layerOfTarget = equippedByEnemy ? LayerMask.GetMask("Enemy") : LayerMask.GetMask("Player");
+    }
+
     public void ExecuteAttack(Transform muzzle, int amount)
     {
         // Debug.Log("Shooting " + amount + " beam(s)");
@@ -64,7 +71,7 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject))
+                    if (hitCollider.gameObject.layer == layerOfTarget && !targets.Contains(hitCollider.gameObject))
                     {
                         Debug.Log("L-HIT: " + hitCollider.name);
                         targets.Add(hitCollider.gameObject);
@@ -114,7 +121,7 @@ public class BeamShooter : MonoBehaviour, IAttack
             knockbackVector = knockbackVector / raycastDirections.Count;
         }
         knockbackVector = knockbackVector.normalized;
-        //TODO: make a general attack script to handle this next part
+        //TODO: make it act different if shot by an enemy
         if (knockbackVector == Vector3.zero) return;
         PlayerAttack playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         if (playerAttack == null) return;
@@ -138,6 +145,11 @@ public class BeamShooter : MonoBehaviour, IAttack
         
         // Apply rotation to forward vector
         return rotation * forward;
+    }
+    
+    public void EquipOnEnemy()
+    {
+        equippedByEnemy = true;
     }
     
     // Draw rays in Scene view for debugging

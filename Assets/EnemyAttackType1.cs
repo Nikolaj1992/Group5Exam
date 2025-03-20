@@ -4,12 +4,18 @@ using UnityEngine;
 public class EnemyAttackType1 : MonoBehaviour
 {
     public float damage;
+    private float lastAttackTime = 0f;
+    private float attackInterval = 1.5f; // Time between attacks
     
-    private void OnCollisionEnter(Collision other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerArmor>().DamagePlayer(damage, gameObject);
+            if (Time.time - lastAttackTime >= attackInterval)
+            {
+                lastAttackTime = Time.time; // Update last attack time
+                other.GetComponent<PlayerArmor>().DamagePlayer(damage, gameObject);
+            }
         }
     }
 }
