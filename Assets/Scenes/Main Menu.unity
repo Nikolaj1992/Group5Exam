@@ -617,6 +617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8045462054966232437, guid: 56356abd2bd6e0f4c800362dcd8ee532, type: 3}
+      propertyPath: m_text
+      value: The Lost Wizard
+      objectReference: {fileID: 0}
     - target: {fileID: 8714932260656736927, guid: 56356abd2bd6e0f4c800362dcd8ee532, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -95.000015

@@ -12,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     // public event Action StrafeStart;
     // public event Action StrafeEnd;
     // public event Action Attack;
+    
+    public event Action LightAttack;
+    public event Action HeavyAttack;
 
     public GameObject weaponPrefab;
     public Transform muzzle;
@@ -54,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             heavyAttackScript.ExecuteAttack(muzzle, weaponInfo.h_amount);
+            HeavyAttack?.Invoke();
         }
     }
 
