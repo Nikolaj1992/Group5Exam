@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     
     void Start()
     {
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        playerCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<Camera>();
     }
     
     void Update()
@@ -24,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
             DetectInteractables();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (detectedObjects.Count > 0 && closestObject != null)
             {
