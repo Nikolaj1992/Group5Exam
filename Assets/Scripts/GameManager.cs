@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
         else if (scene.name == gameScene)
         {
-            SpawnPlayer();
+            // SpawnPlayer();
             if (enemySpawnerPrefab != null)
             {
                 Instantiate(enemySpawnerPrefab);

@@ -52,9 +52,23 @@ public class AnimationHandler : MonoBehaviour
 
     private void SetAttackAnimation() => m_anim.SetTrigger("Attack");
     
-    private void SetLightAttackAnimation() => m_anim.SetInteger("LightAttack", 1);
+    private void SetLightAttackAnimation()
+    {
+        m_anim.SetInteger("LightAttack", 1);
+        StartCoroutine(ResetAttackParameter("LightAttack"));
+    }
     
-    private void SetHeavyAttackAnimation() => m_anim.SetInteger("HeavyAttack", 1);
+    private void SetHeavyAttackAnimation()
+    {
+        m_anim.SetInteger("HeavyAttack", 1);
+        StartCoroutine(ResetAttackParameter("HeavyAttack"));
+    }
+    
+    private IEnumerator ResetAttackParameter(string paramName)
+    {
+        yield return new WaitForSeconds(0.1f);
+        m_anim.SetInteger(paramName, 0);
+    }
 
 
     #region cleanup
