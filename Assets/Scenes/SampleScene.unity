@@ -492,11 +492,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4042594388011830354, guid: 46abe1d61c5075a4c8d6b7c06b81bd22, type: 3}
   m_PrefabInstance: {fileID: 1893277147}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1064383209 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7799485546265836538, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
-  m_PrefabInstance: {fileID: 1336581859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1336581859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -556,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 8358818982562762107, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
       propertyPath: muzzle
       value: 
-      objectReference: {fileID: 1064383209}
+      objectReference: {fileID: 1579656083}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -568,6 +563,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2029549013}
   m_SourcePrefab: {fileID: 100100000, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
+--- !u!4 &1579656083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5874951584330797809, guid: 35addfdb1fb22c04ba60fa81a1140872, type: 3}
+  m_PrefabInstance: {fileID: 1336581859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1893277147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 8748240595049802585, guid: 9f7246ce4e510d244bea87053d57bef1, type: 3}
-  _health: 100
+  maxHealth: 100
   alive: 0
   generalDamageResistance: 0
   impactResistance: 0
