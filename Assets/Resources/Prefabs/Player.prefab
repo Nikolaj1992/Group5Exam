@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9248417010f44994f9e37ec4894aed10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 1749001506509204307, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
   muzzle: {fileID: 5874951584330797809}
 --- !u!114 &-4728668993815915411
 MonoBehaviour:
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 8748240595049802585, guid: 9f7246ce4e510d244bea87053d57bef1, type: 3}
-  _health: 100
+  maxHealth: 100
   alive: 0
   generalDamageResistance: 0
   impactResistance: 0
