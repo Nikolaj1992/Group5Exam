@@ -38,4 +38,8 @@ public class GroundSlashShooter : MonoBehaviour, IAttack
         }
         obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, rotation, 1);
     }
+
+    public void EquipOnEnemy()
+    {
+    }
 }

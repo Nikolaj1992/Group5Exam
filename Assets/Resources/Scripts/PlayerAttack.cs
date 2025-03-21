@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -50,17 +52,7 @@ public class PlayerAttack : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (weaponInfo.g_unique != WeaponInfo.Unique.None)
-            {
-                Debug.Log(weaponInfo.g_unique);
-                HandleUnique(true);
-                LightAttack?.Invoke();
-            }
-            else
-            { 
                 lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
-                LightAttack?.Invoke();
-            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -69,21 +61,50 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    void HandleUnique(bool lightAttack)
+    public void HandleUniqueAndDamageTarget(bool lightAttack, GameObject target)
     {
+        if (target == null) return;
+        HealthHandler t_HH = target.GetComponent<HealthHandler>();
+        if (t_HH == null) return;
+        StatusEffectHandler t_SEH = target.GetComponent<StatusEffectHandler>();
+        if (t_SEH == null) return;
         float damage = lightAttack ? weaponInfo.l_baseDamage : weaponInfo.h_baseDamage;
+        
         switch (weaponInfo.g_unique)
         {
             case WeaponInfo.Unique.Unpredictable:
-                Debug.Log("Q-WEAPON: " + damage);
+                Debug.Log("Q-U-WEAPON: " + damage);
+                if (lightAttack)
+                { 
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Impact);
+                    if (Random.Range(0f, 5f) == 0)
+                    {
+                        StatusEffect randomStatusEffect = StatusEffect.premadeStatusEffects.ElementAt(Random.Range(0, StatusEffect.premadeStatusEffects.Count)).Value;
+                        t_SEH.ApplyStatusEffect(randomStatusEffect);
+                    }
+                }
+                else
+                {
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Piercing);
+                }
                 break;
-            case WeaponInfo.Unique.Fulfilling_Fire:
-                Debug.Log("Q-WEAPON: " + damage);
+            case WeaponInfo.Unique.Lingering:
+                Debug.Log("Q-L-WEAPON: " + damage);
+                if (lightAttack)
+                { 
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Impact); 
+                    t_HH.DealDamageOverTime(damage/(20/3), HealthHandler.DamageType.Impact, 3);
+                }
+                else
+                {
+                    t_HH.DealDamage(damage, HealthHandler.DamageType.Elemental);
+                    t_SEH.ApplyStatusEffect(StatusEffect.premadeStatusEffects["aflame"]);
+                }
                 break;
         }
     }
     
-    public static void ApplyEffectsToTarget(Vector3 knockbackDirection, float knockbackForce, GameObject target)
+    public void ApplyEffectsToTarget(Vector3 knockbackDirection, float knockbackForce, GameObject target)
     {
             if (target != null && target.layer == LayerMask.NameToLayer("Enemy") && target.GetComponent<Rigidbody>() != null)
             {
@@ -94,7 +115,7 @@ public class PlayerAttack : MonoBehaviour
             }
     }
     
-    public static void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
+    public void ApplyEffectsToTargets(Vector3 knockbackDirection, float knockbackForce, List<GameObject> targets)
     {
         foreach (GameObject target in targets)
         {

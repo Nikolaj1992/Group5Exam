@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
@@ -16,9 +17,32 @@ public class BeamShooter : MonoBehaviour, IAttack
     public GameObject beamPrefab;
     public GameObject impactPrefab;
     
-    //TODO: move to general attack script
     private List<GameObject> targets = new List<GameObject>();
+
+    public bool equippedByEnemy = false;
+    private LayerMask layerOfTarget;
     
+    // Color stuff
+    // public VisualEffect beamVFX;
+    // public VisualEffect impactVFX;
+    
+    // List<Color> referenceBeamColors = new List<Color>
+    // {
+    //     new Color(191f / 255f, 50f / 255f, 0f, 1f),  // First HDR reference
+    //     new Color(191f / 255f, 35f / 255f, 0f, 1f),  // Second HDR reference
+    //     new Color(43f / 255f, 0f, 0f, 1f),          // Third HDR reference
+    //     new Color(191f / 255f, 54f / 255f, 0f, 1f),  // Fourth HDR reference
+    //     new Color(191f / 255f, 41f / 255f, 0f, 1f)   // Fifth HDR reference
+    // };
+    // List<float> intensityBeamMultipliers = new List<float> { 3.4f, 4.9f, 0f, 6.1f, 5.6f };
+
+    private void Awake()
+    {
+        layerOfTarget = equippedByEnemy ? LayerMask.GetMask("Enemy") : LayerMask.GetMask("Player");
+        // beamVFX = Resources.Load("Prefabs/vfx_StylizedBeamSmall").GetComponentInChildren<VisualEffect>();
+        // impactVFX = Resources.Load("Prefabs/vfx_BeamImpact").GetComponentInChildren<VisualEffect>();
+    }
+
     public void ExecuteAttack(Transform muzzle, int amount)
     {
         // Debug.Log("Shooting " + amount + " beam(s)");
@@ -64,7 +88,7 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 1);
                 foreach (var hitCollider in hitColliders)
                 {
-                    if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Enemy") && !targets.Contains(hitCollider.gameObject))
+                    if (hitCollider.gameObject.layer == layerOfTarget && !targets.Contains(hitCollider.gameObject))
                     {
                         Debug.Log("L-HIT: " + hitCollider.name);
                         targets.Add(hitCollider.gameObject);
@@ -114,8 +138,15 @@ public class BeamShooter : MonoBehaviour, IAttack
             knockbackVector = knockbackVector / raycastDirections.Count;
         }
         knockbackVector = knockbackVector.normalized;
-        //TODO: make a general attack script to handle this next part
-        if (knockbackVector != Vector3.zero) PlayerAttack.ApplyEffectsToTargets(knockbackVector, 4, targets);
+        //TODO: make it act different if shot by an enemy
+        if (knockbackVector == Vector3.zero) return;
+        PlayerAttack playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        if (playerAttack == null) return;
+        playerAttack.ApplyEffectsToTargets(knockbackVector, 4, targets);
+        foreach (GameObject target in targets)
+        {
+            playerAttack.HandleUniqueAndDamageTarget(true, target);
+        }
     }
     
     private Vector3 GetRandomDirectionInCone(Vector3 forward, float angle)
@@ -131,6 +162,11 @@ public class BeamShooter : MonoBehaviour, IAttack
         
         // Apply rotation to forward vector
         return rotation * forward;
+    }
+    
+    public void EquipOnEnemy()
+    {
+        equippedByEnemy = true;
     }
     
     // Draw rays in Scene view for debugging
