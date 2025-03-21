@@ -38,7 +38,7 @@ public class BeamShooter : MonoBehaviour, IAttack
 
     private void Awake()
     {
-        layerOfTarget = equippedByEnemy ? LayerMask.GetMask("Enemy") : LayerMask.GetMask("Player");
+        layerOfTarget = equippedByEnemy ? LayerMask.GetMask("Player") : LayerMask.GetMask("Enemy");
         // beamVFX = Resources.Load("Prefabs/vfx_StylizedBeamSmall").GetComponentInChildren<VisualEffect>();
         // impactVFX = Resources.Load("Prefabs/vfx_BeamImpact").GetComponentInChildren<VisualEffect>();
     }
