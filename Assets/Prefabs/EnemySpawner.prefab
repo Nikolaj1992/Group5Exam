@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 6493428194293656862, guid: 6735cc6ed12d07542b193ddef9af9bbf, type: 3}
-  - {fileID: 2197560029289404356, guid: f144f148ad81ae04bbb7095cd5166a73, type: 3}
+  - {fileID: 6704708132255217079, guid: 83de577eed96d5d4e8cf8f2271bfc8ac, type: 3}
+  - {fileID: 5708823712127903275, guid: 29688af73b9004d4faabc85e71ea596f, type: 3}
   enemySpawnEffectPrefab: {fileID: 8181182564890240024, guid: 5d893bdef7a7c3f48a91ad4171854a63, type: 3}
   minSpawnRadius: 30
   maxSpawnRadius: 40
