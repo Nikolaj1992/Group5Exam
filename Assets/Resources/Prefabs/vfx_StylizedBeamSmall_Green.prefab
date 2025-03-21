@@ -86,7 +86,7 @@ VisualEffect:
       - m_Value: 0.5
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 7.620532
+      - m_Value: 25
         m_Name: YLength
         m_Overridden: 1
     m_Vector2f:

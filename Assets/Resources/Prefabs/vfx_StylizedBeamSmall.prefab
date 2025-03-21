@@ -54,7 +54,7 @@ VisualEffect:
       - m_Value: 0.5
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 7.979039
+      - m_Value: 25
         m_Name: YLength
         m_Overridden: 1
     m_Vector2f:
@@ -65,19 +65,19 @@ VisualEffect:
       m_Array:
       - m_Value: {x: 8, y: 2.07, z: 0, w: 1}
         m_Name: Color1
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 22.2, y: 4.06, z: 0, w: 1}
         m_Name: Color2
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 0.169, y: 0, z: 0, w: 0}
         m_Name: Color3
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 51.98, y: 14.44, z: 0, w: 1}
         m_Name: Color4
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 36.79, y: 7.89, z: 0, w: 1}
         m_Name: Color5
-        m_Overridden: 0
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
