@@ -3191,7 +3191,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614966}
   - {fileID: 8926484042661614898}
   - {fileID: 8926484042661614985}
-  m_UIPosition: {x: 1686, y: -351}
+  m_UIPosition: {x: 1686, y: -335}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
