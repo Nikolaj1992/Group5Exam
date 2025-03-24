@@ -215,3 +215,4 @@ MonoBehaviour:
   range: 25
   beamPrefab: {fileID: 5999096149344993914, guid: f11c3afe3a9d1204980b44ba01160a16, type: 3}
   impactPrefab: {fileID: 8565516041175105992, guid: 94b39258dea3f1946b1a9f5040a01556, type: 3}
+  equippedByEnemy: 0
