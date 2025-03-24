@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
-
 public class BeamShooter : MonoBehaviour, IAttack
 {
     public float spreadAngle = 15f; // Max spread angle in degrees
@@ -18,9 +17,9 @@ public class BeamShooter : MonoBehaviour, IAttack
     public GameObject impactPrefab;
     
     private List<GameObject> targets = new List<GameObject>();
-
     public bool equippedByEnemy = false;
-    private LayerMask layerOfTarget;
+    // private LayerMask layerOfTarget;
+    private int layerOfTarget;
     
     // Color stuff
     // public VisualEffect beamVFX;
@@ -38,13 +37,14 @@ public class BeamShooter : MonoBehaviour, IAttack
 
     private void Awake()
     {
-        layerOfTarget = equippedByEnemy ? LayerMask.GetMask("Player") : LayerMask.GetMask("Enemy");
+        layerOfTarget = equippedByEnemy ? LayerMask.NameToLayer("Player") : LayerMask.NameToLayer("Enemy");
+        Debug.Log(LayerMask.LayerToName(layerOfTarget) + ", " + layerOfTarget);
         // beamVFX = Resources.Load("Prefabs/vfx_StylizedBeamSmall").GetComponentInChildren<VisualEffect>();
         // impactVFX = Resources.Load("Prefabs/vfx_BeamImpact").GetComponentInChildren<VisualEffect>();
     }
-
     public void ExecuteAttack(Transform muzzle, int amount)
     {
+        if (layerOfTarget == 0) layerOfTarget = equippedByEnemy ? LayerMask.NameToLayer("Player") : LayerMask.NameToLayer("Enemy");
         // Debug.Log("Shooting " + amount + " beam(s)");
         targets.Clear();
         raycastOrigins.Clear();
@@ -53,7 +53,6 @@ public class BeamShooter : MonoBehaviour, IAttack
         
         // Use muzzlePoint position if assigned, otherwise use the script's transform position
         Vector3 origin = muzzle ? muzzle.position : transform.position;
-
         for (int i = 0; i < amount; i++)
         {
             Vector3 direction;
@@ -128,7 +127,6 @@ public class BeamShooter : MonoBehaviour, IAttack
                 Destroy(beam, 0.5f);
             }
         }
-
         if (amount > 1)
         {
             foreach (Vector3 position in raycastDirections)
