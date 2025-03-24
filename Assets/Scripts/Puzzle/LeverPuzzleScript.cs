@@ -40,7 +40,7 @@ public class LeverPuzzleScript : MonoBehaviour
                 leverStates.Add(Random.Range(0, 2) == 0);
             }
         } while (leverStates.SequenceEqual(correctCombination));
-        Debug.Log("S: " + string.Join(", ", leverStates.Select(x => x.ToString()).ToArray()));
+        // Debug.Log("S: " + string.Join(", ", leverStates.Select(x => x.ToString()).ToArray()));
 
         // Randomize lever states at the start
         for (int i = 0; i < levers.Count(); i++)
