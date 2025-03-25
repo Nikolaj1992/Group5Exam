@@ -342,9 +342,9 @@ MonoBehaviour:
   m_Owners:
   - {fileID: 114946465509916290}
   - {fileID: 114780028408030698}
-  - {fileID: 8926484042661614621}
-  - {fileID: 8926484042661614733}
   - {fileID: 8926484042661615070}
+  - {fileID: 8926484042661614733}
+  - {fileID: 8926484042661614621}
   dataType: 0
   capacity: 64
   stripCapacity: 16
@@ -479,11 +479,11 @@ MonoBehaviour:
       slotIndex: 0
   m_OutputFlowSlot:
   - link:
-    - context: {fileID: 8926484042661614621}
+    - context: {fileID: 8926484042661615070}
       slotIndex: 0
     - context: {fileID: 8926484042661614733}
       slotIndex: 0
-    - context: {fileID: 8926484042661615070}
+    - context: {fileID: 8926484042661614621}
       slotIndex: 0
   integration: 0
   angularIntegration: 0
@@ -3191,7 +3191,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614966}
   - {fileID: 8926484042661614898}
   - {fileID: 8926484042661614985}
-  m_UIPosition: {x: 1686, y: -351}
+  m_UIPosition: {x: 1686, y: -335}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -8874,7 +8874,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -10209,7 +10209,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":0.0}'
+      m_SerializableObject: '{"x":-2.0,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _MainTextureSpeed
@@ -10345,7 +10345,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":0.0}'
+      m_SerializableObject: '{"x":-5.0,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _DistortionSpeed
@@ -10754,7 +10754,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":0.0}'
+      m_SerializableObject: '{"x":-2.0,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _MainTextureSpeed
@@ -10890,7 +10890,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":0.0}'
+      m_SerializableObject: '{"x":-0.5,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _DistortionSpeed
@@ -11299,7 +11299,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":0.0}'
+      m_SerializableObject: '{"x":-2.0,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _MainTextureSpeed
@@ -11435,7 +11435,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":0.0}'
+      m_SerializableObject: '{"x":-5.0,"y":0.0}'
     m_Space: -1
   m_Property:
     name: _DistortionSpeed
