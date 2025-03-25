@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2900033098170377493}
   - component: {fileID: 1550886538078950150}
   - component: {fileID: 4225863002921085134}
+  - component: {fileID: 5154246777873466291}
   m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
@@ -72,6 +73,20 @@ MonoBehaviour:
   m_anim: {fileID: 1550886538078950150}
   playerMovement: {fileID: 1607374866568431844}
   playerAttack: {fileID: 8358818982562762107}
+--- !u!114 &5154246777873466291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543214627537157678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524dd4f77728c0046bc8cf7007e19ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBone: {fileID: 8998752715238931955}
+  rotationOffset: -45
 --- !u!1 &3793166088987344940
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,5 +467,10 @@ PrefabInstance:
 --- !u!4 &4681386733718941084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}
+  m_PrefabInstance: {fileID: 5151301118599776887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8998752715238931955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4295559906399074180, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}
   m_PrefabInstance: {fileID: 5151301118599776887}
   m_PrefabAsset: {fileID: 0}
