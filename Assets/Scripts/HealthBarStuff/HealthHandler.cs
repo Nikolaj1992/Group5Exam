@@ -22,6 +22,7 @@ public class HealthHandler : MonoBehaviour
         }
     }
     [HideInInspector] public bool alive;
+    
     public enum DamageType {Piercing, Impact, Elemental} // there is no resistance towards piercing
     [SerializeField] private float generalDamageResistance; // given as 20 for a 20% damage reduction, hence the math in "dealDamage"
     [SerializeField] private float impactResistance;
@@ -75,7 +76,8 @@ public class HealthHandler : MonoBehaviour
 
         if (gameObject.tag != "Player" && !alive)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            // gameObject.SetActive(false);
         }
     }
 

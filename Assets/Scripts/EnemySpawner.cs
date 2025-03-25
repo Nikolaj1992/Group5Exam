@@ -14,6 +14,9 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 7f;    // Seconds between each enemy spawn
     public LayerMask groundLayer;
     
+    [Header("Enemy Limit")]
+    public int maxEnemiesAtOnce = 10;
+    
     private void Start()
     {
         if (player == null)
@@ -65,6 +68,8 @@ public class EnemySpawner : MonoBehaviour
         while (!validPosition && attempts > 0)
         {
             attempts--;
+            
+            // I generate a random position withint maxSpawnRadius and ensure the spawn is on our horizontal plane
             Vector3 randomDirection = Random.insideUnitSphere * maxSpawnRadius;
             randomDirection.y = 0;
             spawnPosition = player.position + randomDirection;
@@ -74,6 +79,7 @@ public class EnemySpawner : MonoBehaviour
             // Not to close to the player and not too far (will look better with fog)
             if (distanceToPlayer > minSpawnRadius && distanceToPlayer < maxSpawnRadius)
             {
+                // By using this raycast check we make sure spawnposition is on the Ground layer
                 if (Physics.Raycast(spawnPosition + Vector3.up * 10, Vector3.down, out RaycastHit hit, 20f,
                         groundLayer))
                 {

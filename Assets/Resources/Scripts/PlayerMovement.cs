@@ -145,32 +145,46 @@ public class PlayerMovement : MonoBehaviour
     
     private void SetModelRotation(Vector3 v)
     {
-        v = new Vector3(v.x, 0.0f, v.z);
-        drawDir = v * 5; // used for OnDrawGizmos (debugging)
+        // Face forward - always
+        Vector3 cameraForward = new Vector3(m_playerCamera.transform.forward.x, 0, m_playerCamera.transform.forward.z).normalized;
 
-        if (m_useBlendTree)
+        if (cameraForward.sqrMagnitude > 0.001f) 
         {
-            if (m_sprinting) // This is legacy for when blendtrees were only used for walking but not sprinting. 
-            {
-                if (v != Vector3.zero) {
-                    Quaternion q = Quaternion.LookRotation(v, Vector3.up);
-                    m_modelTransform.rotation = q;
-                }
-            }
-            else
-            {
-                m_modelTransform.localRotation = Quaternion.identity; 
-            }
-        }
-        else 
-        {
-            if (v != Vector3.zero) 
-            {
-                Quaternion q = Quaternion.LookRotation(v, Vector3.up);
-                m_modelTransform.rotation = q;
-            }
+            Quaternion q = Quaternion.LookRotation(cameraForward, Vector3.up);
+            m_modelTransform.rotation = q; 
         }
     }
+
+
+    
+    // private void SetModelRotation(Vector3 v)
+    // {
+    //     v = new Vector3(v.x, 0.0f, v.z);
+    //     drawDir = v * 5; // used for OnDrawGizmos (debugging)
+    //
+    //     if (m_useBlendTree)
+    //     {
+    //         if (m_sprinting) // This is legacy for when blendtrees were only used for walking but not sprinting. 
+    //         {
+    //             if (v != Vector3.zero) {
+    //                 Quaternion q = Quaternion.LookRotation(v, Vector3.up);
+    //                 m_modelTransform.rotation = q;
+    //             }
+    //         }
+    //         else
+    //         {
+    //             m_modelTransform.localRotation = Quaternion.identity; 
+    //         }
+    //     }
+    //     else 
+    //     {
+    //         if (v != Vector3.zero) 
+    //         {
+    //             Quaternion q = Quaternion.LookRotation(v, Vector3.up);
+    //             m_modelTransform.rotation = q;
+    //         }
+    //     }
+    // }
 
     public bool IsGrounded() => Physics.Raycast(transform.position, -Vector3.up, DistToGround + 0.01f);
     
