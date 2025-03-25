@@ -22,6 +22,8 @@ public class PlayerAttack : MonoBehaviour
     private WeaponInfo weaponInfo;
     private IAttack lightAttackScript;
     private IAttack heavyAttackScript;
+    
+    [SerializeField] private RotationFix rotationFix;
 
     private void Awake()
     {
@@ -52,13 +54,23 @@ public class PlayerAttack : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-                lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
+            rotationFix.OnAttackStart();
+            lightAttackScript.ExecuteAttack(muzzle,weaponInfo.l_amount);
+            StartCoroutine(ResetRotationAfterAttack());
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            rotationFix.OnAttackStart();
             heavyAttackScript.ExecuteAttack(muzzle, weaponInfo.h_amount);
             HeavyAttack?.Invoke();
+            StartCoroutine(ResetRotationAfterAttack());
         }
+    }
+    
+    private IEnumerator ResetRotationAfterAttack()
+    {
+        yield return new WaitForSeconds(0.5f);  // Might need adjustment
+        rotationFix.OnAttackEnd();
     }
 
     public void HandleUniqueAndDamageTarget(bool lightAttack, GameObject target)

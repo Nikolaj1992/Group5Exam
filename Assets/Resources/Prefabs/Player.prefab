@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 1749001506509204307, guid: e3445c6426eb44a4e810ec1bef4906c6, type: 3}
   muzzle: {fileID: 5874951584330797809}
+  rotationFix: {fileID: 5154246777873466291}
 --- !u!114 &-4728668993815915411
 MonoBehaviour:
   m_ObjectHideFlags: 0
